@@ -1,0 +1,24 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+
+    <MudAppBar Color="Color.Primary" Fixed="false" Elevation="2">
+
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e)=> DrawToggle())"></MudIconButton>
+        <MudText Typo="Typo.h5" Class="ml-3">Time Sheet</MudText>
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Material.Rounded.PersonAdd" Color="Color.Inherit" Edge="Edge.End" OnClick="GotoLogin" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="@flgSideToggle" Elevation="1">
+        <NavMenu />
+    </MudDrawer>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.Medium">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>

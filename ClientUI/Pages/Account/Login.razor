@@ -1,0 +1,18 @@
+﻿@page "/account/login"
+@layout AuthLayout
+
+
+<MudCard>
+    <MudCardContent>
+        <MudForm Model="oUser">
+            <MudTextField T="string" Label="Username" Required="true" RequiredError="Username is mandatory" @bind-Text="oUser.UserCode"></MudTextField>
+            <MudTextField T="string" Label="Password" Required="true" RequiredError="Password is mandatory" @bind-Text="oUser.Password" InputType="InputType.Password"></MudTextField>
+        </MudForm>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="LoginUser">Login</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Default">Forget Password</MudButton>
+    </MudCardActions>
+    
+</MudCard>
+
