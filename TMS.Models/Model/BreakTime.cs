@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TMS.Models.Model
 {
-    class BreakTime
+    public class BreakTime
     {
         public int ID { get; set; }
         public User rUser { get; set; }
@@ -12,6 +12,5 @@ namespace TMS.Models.Model
         public DateTime StarTime { get; set; }
         public DateTime EndTime { get; set; }
         public bool flgFullDay { get; set; }
-
     }
 }
