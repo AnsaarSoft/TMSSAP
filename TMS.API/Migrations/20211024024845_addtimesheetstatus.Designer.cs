@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TMS.API.Database;
 
 namespace TMS.API.Migrations
 {
     [DbContext(typeof(TMSContext))]
-    partial class TMSContextModelSnapshot : ModelSnapshot
+    [Migration("20211024024845_addtimesheetstatus")]
+    partial class addtimesheetstatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,8 +31,11 @@ namespace TMS.API.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("StartTime")
+                    b.Property<DateTime>("StarTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("flgFullDay")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("rTimeSheetID")
                         .HasColumnType("int");
@@ -57,8 +62,11 @@ namespace TMS.API.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("StartTime")
+                    b.Property<DateTime>("StarTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("flgFullDay")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("rTimeSheetID")
                         .HasColumnType("int");
@@ -93,12 +101,6 @@ namespace TMS.API.Migrations
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("flgBreak")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("flgLeave")
-                        .HasColumnType("bit");
 
                     b.Property<int?>("rUserID")
                         .HasColumnType("int");

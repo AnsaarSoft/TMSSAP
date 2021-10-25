@@ -40,6 +40,7 @@ namespace ClientUI
             services.AddScoped<IRestClient, RestClient>();
             //Personal
             services.AddScoped<IAccountServices, AccountServices>();
+            services.AddScoped<ITimeSheetServices, TimeSheetServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

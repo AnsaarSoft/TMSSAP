@@ -27,13 +27,13 @@ namespace ClientUI.Services
         {
             oStorageService = localStorageService;
             oClient = restClient;
-            oClient.BaseUrl = new Uri("https://localhost:443/");
+            oClient.BaseUrl = new Uri("http://localhost:56388/api/");
         }
 
 
         public async Task Initiallize()
         {
-            oUser = await oStorageService.GetItemAsync<vmUser>("User");
+            oUser = await oStorageService.GetItemAsync<vmUser>("user");
         }
 
         public async Task<bool> Login(User pUser)

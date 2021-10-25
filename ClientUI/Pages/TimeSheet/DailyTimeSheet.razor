@@ -1,0 +1,46 @@
+﻿@page "/timesheet/dailytimesheet"
+@layout MainLayout
+
+<MudCard>
+    <MudCardContent>
+        <MudContainer>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudDatePicker Label="From Date" @bind-Date="FromDate" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudDatePicker Label="To Date" @bind-Date="ToDate" />
+                </MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem >
+                    <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="GetData" Disabled="flgBusy">Search</MudButton>
+                </MudItem>
+                <MudItem>
+                    <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="GotoTimeSheetAdd">Add Timesheet</MudButton>
+                </MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem>
+                    <MudTable Items="oModel.oCollection">
+                        <HeaderContent>
+                            <MudTh>Id</MudTh>
+                            <MudTh>Day</MudTh>
+                            <MudTh>Date</MudTh>
+                            <MudTh>Start Time</MudTh>
+                            <MudTh>End Time</MudTh>
+                            <MudTh>Status</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="Id">@context.ID</MudTd>
+                            <MudTd DataLabel="Day">@context.DayDate.DayOfWeek.ToString()</MudTd>
+                            <MudTd DataLabel="Date">@context.DayDate.ToString("dd/MM/yyyy")</MudTd>
+                            <MudTd DataLabel="Start Time">@context.StartTime.ToString("t")</MudTd>
+                            <MudTd DataLabel="End Time">@context.EndTime.ToString("t")</MudTd>
+                        </RowTemplate>
+                    </MudTable>
+                </MudItem>
+            </MudGrid>
+        </MudContainer>
+    </MudCardContent>
+</MudCard>

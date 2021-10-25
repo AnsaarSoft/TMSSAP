@@ -1,0 +1,50 @@
+﻿@page "/timesheet/addtime"
+@layout MainLayout
+
+<MudCard>
+    <MudCardContent>
+        <MudContainer>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudDatePicker Label="Day Date" @bind-Date="DayDate" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTimePicker Label="Start Time" @bind-Time="StartTime" AmPm="true" TimeFormat="hh:mm tt" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTimePicker Label="End Time" @bind-Time="EndTime" AmPm="true" TimeFormat="hh:mm tt" />
+                </MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudSwitch @bind-Checked="flgLeave" Color="Color.Primary">Leave Toggle</MudSwitch>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTimePicker Label="Start Time" @bind-Time="LeaveStartTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgLeave"/>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTimePicker Label="End Time" @bind-Time="LeaveEndTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgLeave"/>
+                </MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudSwitch @bind-Checked="flgBreak" Color="Color.Primary">Break Toggle</MudSwitch>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTimePicker Label="Start Time" @bind-Time="BreakStartTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgBreak"/>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTimePicker Label="End Time" @bind-Time="BreakEndTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgBreak"/>
+                </MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem>
+                    <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddTimeRecord" Disabled="flgBusy">Add Time</MudButton>
+                </MudItem>
+                <MudItem>
+                    <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="CancelTime">Cancel</MudButton>
+                </MudItem>
+            </MudGrid>
+        </MudContainer>
+    </MudCardContent>
+</MudCard>

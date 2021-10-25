@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TMS.API.Database;
+using TMS.API.Model;
 
 namespace TMS.API
 {
@@ -29,6 +30,8 @@ namespace TMS.API
         {
             services.AddControllers();
             services.AddDbContext<TMSContext>(op => op.UseSqlServer(Configuration.GetConnectionString("TMSDB")));
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITimeSheetRepository, TimeSheetRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TMS.API", Version = "v1" });

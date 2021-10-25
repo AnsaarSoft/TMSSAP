@@ -22,8 +22,7 @@ namespace ClientUI.Pages.Account
         IAccountServices oService { get; set; }
         [Inject]
         NavigationManager oNavigation { get; set; }
-        [Inject]
-        ILocalStorageService oStorage { get; set; }
+        
         #endregion
 
         #region Functions
