@@ -33,7 +33,7 @@ namespace TMS.API.Controllers
                 {
                     ResponseMessage oResponse = new ResponseMessage();
                     oResponse.isSuccess = true;
-                    oResponse.JWTKey = "muhahahahha";
+                    oResponse.JWTKey = "128jSHu3920kdsk483cnm8472";
                     oResponse.UserInfo = oUser;
                     return Ok(oResponse);
                 }

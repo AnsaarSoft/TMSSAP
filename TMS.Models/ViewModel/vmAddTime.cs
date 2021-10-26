@@ -9,16 +9,16 @@ namespace TMS.Models.ViewModel
     {
         public vmAddTime()
         {
-            oTime = new TimeSheet();
+            oTime = new mTimeSheet();
             flgSuccess = false;
             Message = "";
-            oLeave = new LeaveTime();
-            oBreak = new BreakTime();
+            oLeave = new mLeaveTime();
+            oBreak = new mBreakTime();
         }
         public bool flgSuccess { get; set; }
         public string Message { get; set; }
-        public TimeSheet oTime { get; set; }
-        public LeaveTime oLeave { get; set; }
-        public BreakTime oBreak { get; set; }
+        public mTimeSheet oTime { get; set; }
+        public mLeaveTime oLeave { get; set; }
+        public mBreakTime oBreak { get; set; }
     }
 }

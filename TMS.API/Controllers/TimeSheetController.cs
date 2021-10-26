@@ -82,15 +82,16 @@ namespace TMS.API.Controllers
         {
             try
             {
-                var flgSuccessTime = await oTimeSheetRepository.AddTimeSheet(oSheet);
-                if (flgSuccessTime != null)
-                {
-                    return Ok(oSheet);
-                }
-                else
-                {
-                    return BadRequest("Record update failed.");
-                }
+                //var flgSuccessTime = await oTimeSheetRepository.AddTimeSheet(oSheet);
+                //if (flgSuccessTime != null)
+                //{
+                //    return Ok(oSheet);
+                //}
+                //else
+                //{
+                //    return BadRequest("Record update failed.");
+                //}
+                return Ok(oSheet);
             }
             catch (Exception ex)
             {

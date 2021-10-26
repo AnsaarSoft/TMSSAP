@@ -21,7 +21,10 @@
                     <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="GotoTimeSheetAdd">Add Timesheet</MudButton>
                 </MudItem>
                 <MudItem>
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SubmitSheets">Submit</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SubmitSheets" Disabled="flgBusy">Submit</MudButton>
+                </MudItem>
+                <MudItem>
+                    <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="CancelSheets" Disabled="flgBusy">Cancel</MudButton>
                 </MudItem>
             </MudGrid>
             <MudGrid>
@@ -33,6 +36,8 @@
                             <MudTh>Date</MudTh>
                             <MudTh>Start Time</MudTh>
                             <MudTh>End Time</MudTh>
+                            <MudTh>Leave</MudTh>
+                            <MudTh>Break</MudTh>
                             <MudTh>Status</MudTh>
                         </HeaderContent>
                         <RowTemplate>
@@ -41,6 +46,8 @@
                             <MudTd DataLabel="Date">@context.DayDate.ToString("dd/MM/yyyy")</MudTd>
                             <MudTd DataLabel="Start Time">@context.StartTime.ToString("t")</MudTd>
                             <MudTd DataLabel="End Time">@context.EndTime.ToString("t")</MudTd>
+                            <MudTd DataLabel="Leave"><MudSwitch Color="Color.Primary" @bind-Checked="@context.flgLeave"/></MudTd>
+                            <MudTd DataLabel="Break"><MudSwitch Color="Color.Primary" @bind-Checked="@context.flgBreak" /></MudTd>
                             <MudTd DataLabel="Status">@context.Status</MudTd>
                         </RowTemplate>
                         <PagerContent>

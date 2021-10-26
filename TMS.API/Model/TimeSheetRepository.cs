@@ -15,6 +15,7 @@ namespace TMS.API.Model
         Task<TimeSheet> AddTimeSheet(vmAddTime pTime);
         Task<LeaveTime> AddLeave(vmAddTime pTime);
         Task<BreakTime> AddBreak(vmAddTime pTime);
+        Task SubmitTimeSheet(vmTimeSheet oSheet);
     }
 
     public class TimeSheetRepository : ITimeSheetRepository
@@ -35,6 +36,7 @@ namespace TMS.API.Model
                                where a.DayDate >= pTimeSheet.dtFrom
                                && a.DayDate <= pTimeSheet.dtTo
                                && a.rUser == pTimeSheet.oUser.ID
+                               
                                select a).ToListAsync();
             }
             catch (Exception ex)
@@ -49,24 +51,14 @@ namespace TMS.API.Model
             
             try
             {
+                TimeSheet oNew = pTime.oTime.Mapping();
                 var CheckTime = await (from a in dbContext.TimeSheets
-                                       where a.DayDate.Date == pTime.oTime.DayDate.Date
-                                       && a.rUser == pTime.oTime.rUser
+                                       where a.DayDate.Date == oNew.DayDate.Date
+                                       && a.rUser == oNew.rUser
                                        select a).FirstOrDefaultAsync();
-                //if (CheckTime != null)
-                //    return null;
-
-                TimeSheet oNew = new TimeSheet()
-                {
-                    DayDate = pTime.oTime.DayDate,
-                    StartTime = pTime.oTime.StartTime,
-                    EndTime = pTime.oTime.EndTime,
-                    flgLeave = pTime.oTime.flgLeave,
-                    flgBreak = pTime.oTime.flgBreak,
-                    Status = "Draft",
-                    rUser = pTime.oTime.rUser
-                };
-                
+                if (CheckTime != null)
+                    return null;
+                oNew.Status = "Draft";
                 await dbContext.TimeSheets.AddAsync(oNew);
                 await dbContext.SaveChangesAsync();
                 return oNew;
@@ -82,15 +74,14 @@ namespace TMS.API.Model
 
             try
             {
+                LeaveTime oNew = pTime.oLeave.Mapping();
                 var CheckLeave = await (from a in dbContext.LeaveTimes
-                                       where a.rUser == pTime.oTime.rUser
-                                       && a.rTimeSheet == pTime.oTime.ID
+                                       where a.rUser == oNew.rUser
+                                       && a.rTimeSheet == oNew.rTimeSheet
                                        select a).FirstOrDefaultAsync();
                 if (CheckLeave != null)
                     return null;
-
-                LeaveTime oNew = pTime.oLeave;
-                oNew.rTimeSheet = pTime.oTime.ID;
+                
                 await dbContext.LeaveTimes.AddAsync(oNew);
                 await dbContext.SaveChangesAsync();
                 return oNew;
@@ -106,15 +97,13 @@ namespace TMS.API.Model
 
             try
             {
+                BreakTime oNew = pTime.oBreak.Mapping();
                 var CheckBreak = await (from a in dbContext.BreakTimes
                                         where a.rUser == pTime.oTime.rUser
                                         && a.rTimeSheet == pTime.oTime.ID
                                         select a).FirstOrDefaultAsync();
                 if (CheckBreak != null)
                     return null;
-
-                BreakTime oNew = pTime.oBreak;
-                oNew.rTimeSheet = pTime.oTime.ID;
                 await dbContext.BreakTimes.AddAsync(oNew);
                 await dbContext.SaveChangesAsync();
                 return oNew;
@@ -127,7 +116,6 @@ namespace TMS.API.Model
 
         public async Task SubmitTimeSheet(vmTimeSheet oSheet)
         {
-
             try
             {
                 foreach(var One in oSheet.oSelected)
@@ -136,7 +124,29 @@ namespace TMS.API.Model
                                    where a.ID == One.ID
                                    select a).FirstOrDefaultAsync();
                     if (oRecord == null) continue;
+                    if (oRecord.Status != "Draft") continue;
                     oRecord.Status = "Posted";
+                    dbContext.Entry<TimeSheet>(oRecord).State = EntityState.Modified;
+                }
+                await dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        public async Task CancelTimeSheet(vmTimeSheet oSheet)
+        {
+            try
+            {
+                foreach (var One in oSheet.oSelected)
+                {
+                    var oRecord = await (from a in dbContext.TimeSheets
+                                         where a.ID == One.ID
+                                         select a).FirstOrDefaultAsync();
+                    if (oRecord == null) continue;
+                    if (oRecord.Status == "Posted") continue;
+                    oRecord.Status = "Cancelled";
                     dbContext.Entry<TimeSheet>(oRecord).State = EntityState.Modified;
                 }
                 await dbContext.SaveChangesAsync();

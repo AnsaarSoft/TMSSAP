@@ -20,8 +20,6 @@ namespace ClientUI.Pages.TimeSheet
 
         vmTimeSheet oModel = new vmTimeSheet();
 
-        
-
         [Inject]
         ITimeSheetServices oService { get; set; }
         [Inject]
@@ -81,6 +79,18 @@ namespace ClientUI.Pages.TimeSheet
         }
 
         public async Task SubmitSheets()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage("Something went wrong.");
+            }
+        }
+
+        public async Task CancelSheets()
         {
             try
             {

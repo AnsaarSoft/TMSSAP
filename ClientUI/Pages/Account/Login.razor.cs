@@ -1,6 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using ClientUI.Services;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,44 +16,46 @@ namespace ClientUI.Pages.Account
         #region Variables
         
         User oUser = new User();
-        bool isBusy = false;
+        bool flgBusy = false;
         string message = string.Empty;
 
         [Inject]
         IAccountServices oService { get; set; }
         [Inject]
         NavigationManager oNavigation { get; set; }
-        
+        [Inject]
+        ISnackbar toast { get; set; }
         #endregion
 
         #region Functions
 
         public async Task LoginUser()
         {
-            isBusy = true;
+            flgBusy = true;
             var result = await oService.Login(oUser);
             if (result)
             {
                 message = "You logged in successfully.";
-                ShowSuccess(message);
+                SuccessMessage(message);
                 await Task.Delay(2000);
                 oNavigation.NavigateTo("/");
             }
             else
             {
                 message = "Wrong credentials, try again.";
-                ShowError(message);
+                ErrorMessage(message);
             }
-            isBusy = false;
+            flgBusy = false;
         }
 
-        void ShowSuccess(string message)
+        public void SuccessMessage(string message)
         {
-            
+            toast.Add(message, Severity.Success);
         }
 
-        void ShowError(string message)
+        public void ErrorMessage(string message)
         {
+            toast.Add(message, Severity.Error);
         }
 
         #endregion
