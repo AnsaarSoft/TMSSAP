@@ -32,17 +32,13 @@ namespace TMS.API.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("rTimeSheetID")
+                    b.Property<int>("rTimeSheet")
                         .HasColumnType("int");
 
-                    b.Property<int?>("rUserID")
+                    b.Property<int>("rUser")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("rTimeSheetID");
-
-                    b.HasIndex("rUserID");
 
                     b.ToTable("BreakTimes");
                 });
@@ -60,17 +56,13 @@ namespace TMS.API.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("rTimeSheetID")
+                    b.Property<int>("rTimeSheet")
                         .HasColumnType("int");
 
-                    b.Property<int?>("rUserID")
+                    b.Property<int>("rUser")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("rTimeSheetID");
-
-                    b.HasIndex("rUserID");
 
                     b.ToTable("LeaveTimes");
                 });
@@ -100,12 +92,10 @@ namespace TMS.API.Migrations
                     b.Property<bool>("flgLeave")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("rUserID")
+                    b.Property<int>("rUser")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("rUserID");
 
                     b.ToTable("TimeSheets");
                 });
@@ -138,45 +128,18 @@ namespace TMS.API.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Users");
-                });
 
-            modelBuilder.Entity("TMS.Models.Model.BreakTime", b =>
-                {
-                    b.HasOne("TMS.Models.Model.TimeSheet", "rTimeSheet")
-                        .WithMany()
-                        .HasForeignKey("rTimeSheetID");
-
-                    b.HasOne("TMS.Models.Model.User", "rUser")
-                        .WithMany()
-                        .HasForeignKey("rUserID");
-
-                    b.Navigation("rTimeSheet");
-
-                    b.Navigation("rUser");
-                });
-
-            modelBuilder.Entity("TMS.Models.Model.LeaveTime", b =>
-                {
-                    b.HasOne("TMS.Models.Model.TimeSheet", "rTimeSheet")
-                        .WithMany()
-                        .HasForeignKey("rTimeSheetID");
-
-                    b.HasOne("TMS.Models.Model.User", "rUser")
-                        .WithMany()
-                        .HasForeignKey("rUserID");
-
-                    b.Navigation("rTimeSheet");
-
-                    b.Navigation("rUser");
-                });
-
-            modelBuilder.Entity("TMS.Models.Model.TimeSheet", b =>
-                {
-                    b.HasOne("TMS.Models.Model.User", "rUser")
-                        .WithMany()
-                        .HasForeignKey("rUserID");
-
-                    b.Navigation("rUser");
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Email = "mfmjnj@gmail.com",
+                            LeaveHours = 80.0,
+                            Password = "123",
+                            SBOId = "",
+                            UserCode = "admin",
+                            UserName = "MFM"
+                        });
                 });
 #pragma warning restore 612, 618
         }

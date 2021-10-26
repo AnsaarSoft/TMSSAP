@@ -1,5 +1,6 @@
 ﻿using ClientUI.Services;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace ClientUI.Pages.TimeSheet
         #region Variable
         bool flgBusy = false;
 
-        DateTime? DayDate = DateTime.Now;
+        DateTime? DayDate = DateTime.UtcNow;
         TimeSpan? StartTime = new TimeSpan(8,0,0);
         TimeSpan? EndTime = new TimeSpan(16,0,0);
         TimeSpan? LeaveStartTime = new TimeSpan(8, 0, 0);
@@ -31,60 +32,51 @@ namespace ClientUI.Pages.TimeSheet
         ITimeSheetServices oService { get; set; }
         [Inject]
         NavigationManager oNavigation { get; set; }
-
+        [Inject]
+        ISnackbar toast { get; set; }
 
         #endregion
 
         #region Function
 
-        protected override async Task OnInitializedAsync()
-        {
-            await FormInitiallize();
-        }
-
-        public async Task FormInitiallize()
-        {
-            await Task.Run(() => { 
-
-            });
-        }
-
         public async Task AddTimeRecord()
         {
             try
             {
-                oModel.oTime.DayDate = DayDate.GetValueOrDefault();
-                oModel.oTime.StartTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, StartTime.Value.Hours, StartTime.Value.Minutes, 0);
-                oModel.oTime.EndTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, EndTime.Value.Hours, EndTime.Value.Minutes, 0);
+                oModel.oTime.DayDate = DayDate.GetValueOrDefault().ToUniversalTime();
+                oModel.oTime.StartTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, StartTime.Value.Hours, StartTime.Value.Minutes, 0).ToUniversalTime();
+                oModel.oTime.EndTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, EndTime.Value.Hours, EndTime.Value.Minutes, 0).ToUniversalTime();
                 if(flgLeave)
                 {
                     oModel.oTime.flgLeave = flgLeave;
                     oModel.oLeave = new LeaveTime();
-                    oModel.oLeave.StartTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, LeaveStartTime.Value.Hours, LeaveStartTime.Value.Minutes, 0);
-                    oModel.oLeave.EndTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, LeaveEndTime.Value.Hours, LeaveEndTime.Value.Minutes, 0);
+                    oModel.oLeave.StartTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, LeaveStartTime.Value.Hours, LeaveStartTime.Value.Minutes, 0).ToUniversalTime();
+                    oModel.oLeave.EndTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, LeaveEndTime.Value.Hours, LeaveEndTime.Value.Minutes, 0).ToUniversalTime();
                 }
                 if(flgBreak)
                 {
                     oModel.oTime.flgBreak = flgBreak;
                     oModel.oBreak = new BreakTime();
-                    oModel.oBreak.StartTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, BreakStartTime.Value.Hours, BreakStartTime.Value.Minutes, 0);
-                    oModel.oBreak.EndTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, BreakEndTime.Value.Hours, BreakEndTime.Value.Minutes, 0);
+                    oModel.oBreak.StartTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, BreakStartTime.Value.Hours, BreakStartTime.Value.Minutes, 0).ToUniversalTime();
+                    oModel.oBreak.EndTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, BreakEndTime.Value.Hours, BreakEndTime.Value.Minutes, 0).ToUniversalTime();
                 }
 
                 var CheckTime = await oService.AddTimeSheet(oModel);
                 if(CheckTime == null)
                 {
                     //"Error"
+                    ErrorMessage("Record didn't add, something went wrong.");
                 }
                 else
                 {
                     //Success
+                    SuccessMessage("Record added successfully.");
                     ClearRecord();
                 }
             }
             catch (Exception ex)
             {
-
+                ErrorMessage("Something went wrong.");
             }
         }
 
@@ -93,7 +85,7 @@ namespace ClientUI.Pages.TimeSheet
             oNavigation.NavigateTo("/timesheet/dailytimesheet");
         }
 
-        public async Task ClearRecord()
+        public void ClearRecord()
         {
             DayDate = DateTime.Now;
             StartTime = new TimeSpan(8, 0, 0);
@@ -104,6 +96,16 @@ namespace ClientUI.Pages.TimeSheet
             BreakEndTime = new TimeSpan(16, 0, 0);
             flgLeave = false;
             flgBreak = false;
+        }
+
+        public void SuccessMessage(string message)
+        {
+            toast.Add(message, Severity.Success);
+        }
+
+        public void ErrorMessage(string message)
+        {
+            toast.Add(message, Severity.Error);
         }
 
         #endregion

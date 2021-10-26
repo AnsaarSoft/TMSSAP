@@ -75,7 +75,7 @@ namespace ClientUI.Services
                 await Initiallize();
                 if (oUser != null)
                 {
-                    oTime.oTime.rUser = oUser.User;
+                    oTime.oTime.rUser = oUser.User.ID;
                 }
                 else
                 {

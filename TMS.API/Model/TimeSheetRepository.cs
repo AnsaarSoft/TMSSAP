@@ -34,7 +34,7 @@ namespace TMS.API.Model
                 oList = await (from a in dbContext.TimeSheets
                                where a.DayDate >= pTimeSheet.dtFrom
                                && a.DayDate <= pTimeSheet.dtTo
-                               && a.rUser.ID == pTimeSheet.oUser.ID
+                               && a.rUser == pTimeSheet.oUser.ID
                                select a).ToListAsync();
             }
             catch (Exception ex)
@@ -50,11 +50,11 @@ namespace TMS.API.Model
             try
             {
                 var CheckTime = await (from a in dbContext.TimeSheets
-                                       where a.DayDate == pTime.oTime.DayDate
-                                       && a.rUser.ID == pTime.oTime.rUser.ID
+                                       where a.DayDate.Date == pTime.oTime.DayDate.Date
+                                       && a.rUser == pTime.oTime.rUser
                                        select a).FirstOrDefaultAsync();
-                if (CheckTime != null)
-                    return null;
+                //if (CheckTime != null)
+                //    return null;
 
                 TimeSheet oNew = new TimeSheet()
                 {
@@ -64,7 +64,7 @@ namespace TMS.API.Model
                     flgLeave = pTime.oTime.flgLeave,
                     flgBreak = pTime.oTime.flgBreak,
                     Status = "Draft",
-                    rUser = null
+                    rUser = pTime.oTime.rUser
                 };
                 
                 await dbContext.TimeSheets.AddAsync(oNew);
@@ -83,14 +83,14 @@ namespace TMS.API.Model
             try
             {
                 var CheckLeave = await (from a in dbContext.LeaveTimes
-                                       where a.rUser.ID == pTime.oTime.rUser.ID
-                                       && a.rTimeSheet.ID == pTime.oTime.ID
+                                       where a.rUser == pTime.oTime.rUser
+                                       && a.rTimeSheet == pTime.oTime.ID
                                        select a).FirstOrDefaultAsync();
                 if (CheckLeave != null)
                     return null;
 
                 LeaveTime oNew = pTime.oLeave;
-                oNew.rTimeSheet = pTime.oTime;
+                oNew.rTimeSheet = pTime.oTime.ID;
                 await dbContext.LeaveTimes.AddAsync(oNew);
                 await dbContext.SaveChangesAsync();
                 return oNew;
@@ -107,14 +107,14 @@ namespace TMS.API.Model
             try
             {
                 var CheckBreak = await (from a in dbContext.BreakTimes
-                                        where a.rUser.ID == pTime.oTime.rUser.ID
-                                        && a.rTimeSheet.ID == pTime.oTime.ID
+                                        where a.rUser == pTime.oTime.rUser
+                                        && a.rTimeSheet == pTime.oTime.ID
                                         select a).FirstOrDefaultAsync();
                 if (CheckBreak != null)
                     return null;
 
                 BreakTime oNew = pTime.oBreak;
-                oNew.rTimeSheet = pTime.oTime;
+                oNew.rTimeSheet = pTime.oTime.ID;
                 await dbContext.BreakTimes.AddAsync(oNew);
                 await dbContext.SaveChangesAsync();
                 return oNew;

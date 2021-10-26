@@ -12,6 +12,7 @@ namespace TMS.Models.ViewModel
         public DateTime dtTo { get; set; }
         public User oUser { get; set; }
         public List<TimeSheet> oCollection { get; set; }
+        public HashSet<TimeSheet> oSelected { get; set; }
 
     }
 }

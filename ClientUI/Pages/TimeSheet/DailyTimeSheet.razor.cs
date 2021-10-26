@@ -1,9 +1,11 @@
 ﻿using ClientUI.Services;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TMS.Models.Model;
 using TMS.Models.ViewModel;
 
 namespace ClientUI.Pages.TimeSheet
@@ -18,14 +20,24 @@ namespace ClientUI.Pages.TimeSheet
 
         vmTimeSheet oModel = new vmTimeSheet();
 
+        
+
         [Inject]
         ITimeSheetServices oService { get; set; }
         [Inject]
         NavigationManager oNavigation { get; set; }
+        [Inject]
+        ISnackbar toast { get; set; }
 
         #endregion
 
         #region Function
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            WeekStart();
+        }
 
         public async Task GetData()
         {
@@ -35,11 +47,11 @@ namespace ClientUI.Pages.TimeSheet
                 oModel.dtFrom = FromDate.GetValueOrDefault();
                 oModel.dtTo = ToDate.GetValueOrDefault();
                 oModel.oCollection = await oService.GetUserTimeSheet(oModel);
-
+                SuccessMessage("data loaded successfuly.");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
+                ErrorMessage("something went wrong.");
             }
             flgBusy = false;
         }
@@ -64,7 +76,7 @@ namespace ClientUI.Pages.TimeSheet
             }
             catch (Exception)
             {
-
+                ErrorMessage("something went worng.");
             }
         }
 
@@ -73,6 +85,15 @@ namespace ClientUI.Pages.TimeSheet
             oNavigation.NavigateTo("/timesheet/addtime");
         }
 
+        public void SuccessMessage(string message)
+        {
+            toast.Add(message, Severity.Success);
+        }
+
+        public void ErrorMessage(string message)
+        {
+            toast.Add(message, Severity.Error);
+        }
         #endregion
     }
 }

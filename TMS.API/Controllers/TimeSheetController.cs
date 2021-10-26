@@ -32,6 +32,7 @@ namespace TMS.API.Controllers
                 if (ListValue != null)
                 {
                     oSheet.oCollection = ListValue;
+                    oSheet.flgSuccess = true;
                     return Ok(oSheet);
                 }
                 else

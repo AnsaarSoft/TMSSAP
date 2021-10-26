@@ -1,4 +1,5 @@
-﻿@page "/timesheet/dailytimesheet"
+﻿
+@page "/timesheet/dailytimesheet"
 @layout MainLayout
 
 <MudCard>
@@ -21,8 +22,8 @@
                 </MudItem>
             </MudGrid>
             <MudGrid>
-                <MudItem>
-                    <MudTable Items="oModel.oCollection">
+                <MudItem xs="12" sm="6" md="12">
+                    <MudTable  MultiSelection="true" Items="oModel.oCollection" @bind-SelectedItems="oModel.oSelected" Hover="true" Striped="true" Bordered="true">
                         <HeaderContent>
                             <MudTh>Id</MudTh>
                             <MudTh>Day</MudTh>
@@ -37,7 +38,11 @@
                             <MudTd DataLabel="Date">@context.DayDate.ToString("dd/MM/yyyy")</MudTd>
                             <MudTd DataLabel="Start Time">@context.StartTime.ToString("t")</MudTd>
                             <MudTd DataLabel="End Time">@context.EndTime.ToString("t")</MudTd>
+                            <MudTd DataLabel="Status">@context.Status</MudTd>
                         </RowTemplate>
+                        <PagerContent>
+                            <MudTablePager />
+                        </PagerContent>
                     </MudTable>
                 </MudItem>
             </MudGrid>

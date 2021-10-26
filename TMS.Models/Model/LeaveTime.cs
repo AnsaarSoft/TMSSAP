@@ -8,11 +8,9 @@ namespace TMS.Models.Model
 {
     public class LeaveTime
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-        public User rUser { get; set; }
-        public TimeSheet rTimeSheet { get; set; }
+        public int rUser { get; set; }
+        public int rTimeSheet { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         
