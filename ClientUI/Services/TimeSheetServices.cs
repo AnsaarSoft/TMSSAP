@@ -15,6 +15,7 @@ namespace ClientUI.Services
         Task Initiallize();
         Task<List<TimeSheet>> GetUserTimeSheet(vmTimeSheet oSheet);
         Task<vmAddTime> AddTimeSheet(vmAddTime oTime);
+        Task<vmTimeSheet> SubmitTimeSheet(vmTimeSheet oTime);
     }
     public class TimeSheetServices : ITimeSheetServices
     {
@@ -98,6 +99,35 @@ namespace ClientUI.Services
             }
         }
 
+        public async Task<vmTimeSheet> SubmitTimeSheet(vmTimeSheet oSheet)
+        {
+            try
+            {
+                await Initiallize();
+                if (oUser != null)
+                {
+                    oSheet.oUser = oUser.User;
+                }
+                else
+                {
+                    return null;
+                }
+                var Request = new RestRequest("/timesheet/addtime").AddJsonBody(oSheet);
+                var Response = await oClient.PostAsync<vmTimeSheet>(Request);
+                if (Response.flgSuccess)
+                {
+                    return Response;
+                }
+                else
+                {
+                    return Response;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
     }
 }

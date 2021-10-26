@@ -76,5 +76,27 @@ namespace TMS.API.Controllers
             }
         }
 
+        
+        [HttpPost, Route("submitsheet")]
+        public async Task<IActionResult> SubmitTimeSheet([FromBody] vmTimeSheet oSheet)
+        {
+            try
+            {
+                var flgSuccessTime = await oTimeSheetRepository.AddTimeSheet(oSheet);
+                if (flgSuccessTime != null)
+                {
+                    return Ok(oSheet);
+                }
+                else
+                {
+                    return BadRequest("Record update failed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Some went wrong.");
+            }
+        }
+
     }
 }

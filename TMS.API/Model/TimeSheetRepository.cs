@@ -124,7 +124,28 @@ namespace TMS.API.Model
                 return null;
             }
         }
-        
+
+        public async Task SubmitTimeSheet(vmTimeSheet oSheet)
+        {
+
+            try
+            {
+                foreach(var One in oSheet.oSelected)
+                {
+                    var oRecord = await (from a in dbContext.TimeSheets
+                                   where a.ID == One.ID
+                                   select a).FirstOrDefaultAsync();
+                    if (oRecord == null) continue;
+                    oRecord.Status = "Posted";
+                    dbContext.Entry<TimeSheet>(oRecord).State = EntityState.Modified;
+                }
+                await dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
     }
 }
 

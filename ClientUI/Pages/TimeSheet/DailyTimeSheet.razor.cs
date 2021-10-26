@@ -80,6 +80,18 @@ namespace ClientUI.Pages.TimeSheet
             }
         }
 
+        public async Task SubmitSheets()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage("Something went wrong.");
+            }
+        }
+
         public async Task GotoTimeSheetAdd()
         {
             oNavigation.NavigateTo("/timesheet/addtime");
@@ -94,6 +106,7 @@ namespace ClientUI.Pages.TimeSheet
         {
             toast.Add(message, Severity.Error);
         }
+
         #endregion
     }
 }
