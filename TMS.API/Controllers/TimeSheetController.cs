@@ -31,8 +31,6 @@ namespace TMS.API.Controllers
                 var ListValue = await oTimeSheetRepository.GetUserData(oSheet);
                 if (ListValue != null)
                 {
-                    oSheet.oCollection = ListValue;
-                    oSheet.flgSuccess = true;
                     return Ok(oSheet);
                 }
                 else
@@ -82,15 +80,23 @@ namespace TMS.API.Controllers
         {
             try
             {
-                //var flgSuccessTime = await oTimeSheetRepository.AddTimeSheet(oSheet);
-                //if (flgSuccessTime != null)
-                //{
-                //    return Ok(oSheet);
-                //}
-                //else
-                //{
-                //    return BadRequest("Record update failed.");
-                //}
+                await oTimeSheetRepository.SubmitTimeSheet(oSheet);
+                oSheet.flgSuccess = true;
+                return Ok(oSheet);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Some went wrong.");
+            }
+        }
+
+        [HttpPost, Route("cancelsheet")]
+        public async Task<IActionResult> CancelTimeSheet([FromBody] vmTimeSheet oSheet)
+        {
+            try
+            {
+                await oTimeSheetRepository.CancelTimeSheet(oSheet);
+                oSheet.flgSuccess = true;
                 return Ok(oSheet);
             }
             catch (Exception ex)

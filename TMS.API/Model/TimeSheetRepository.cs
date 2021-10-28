@@ -16,6 +16,7 @@ namespace TMS.API.Model
         Task<LeaveTime> AddLeave(vmAddTime pTime);
         Task<BreakTime> AddBreak(vmAddTime pTime);
         Task SubmitTimeSheet(vmTimeSheet oSheet);
+        Task CancelTimeSheet(vmTimeSheet oSheet);
     }
 
     public class TimeSheetRepository : ITimeSheetRepository
@@ -36,7 +37,6 @@ namespace TMS.API.Model
                                where a.DayDate >= pTimeSheet.dtFrom
                                && a.DayDate <= pTimeSheet.dtTo
                                && a.rUser == pTimeSheet.oUser.ID
-                               
                                select a).ToListAsync();
             }
             catch (Exception ex)

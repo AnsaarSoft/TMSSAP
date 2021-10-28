@@ -15,6 +15,7 @@ namespace ClientUI.Services
         vmUser oUser { get; }
         Task Initiallize();
         Task<bool> Login(User pUser);
+        Task<bool> Logout();
     }
 
     public class AccountServices : IAccountServices
@@ -40,7 +41,6 @@ namespace ClientUI.Services
         {
             try
             {
-
                 var Request = new RestRequest("/account/login").AddJsonBody(pUser);
                 var Response = await oClient.PostAsync<ResponseMessage>(Request);
                 if (Response.isSuccess)
@@ -55,6 +55,19 @@ namespace ClientUI.Services
                 {
                     return false;
                 }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> Logout()
+        {
+            try
+            {
+                await oStorageService.RemoveItemAsync("user");
+                return true;
             }
             catch (Exception)
             {

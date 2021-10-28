@@ -35,7 +35,6 @@ namespace ClientUI
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
             services.AddMudServices(config =>
             {
                 config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomLeft;
@@ -52,6 +51,8 @@ namespace ClientUI
             //Personal
             services.AddScoped<IAccountServices, AccountServices>();
             services.AddScoped<ITimeSheetServices, TimeSheetServices>();
+            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

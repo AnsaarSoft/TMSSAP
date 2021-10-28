@@ -45,7 +45,14 @@ namespace ClientUI.Pages.TimeSheet
                 oModel.dtFrom = FromDate.GetValueOrDefault();
                 oModel.dtTo = ToDate.GetValueOrDefault();
                 oModel.oCollection = await oService.GetUserTimeSheet(oModel);
-                SuccessMessage("data loaded successfuly.");
+                if(oModel.oCollection != null)
+                {
+                    SuccessMessage("Data loaded successfuly.");
+                }
+                else
+                {
+                    ErrorMessage("Data didn't loaded");
+                }
             }
             catch (Exception)
             {
@@ -80,26 +87,32 @@ namespace ClientUI.Pages.TimeSheet
 
         public async Task SubmitSheets()
         {
+            flgBusy = true;
             try
             {
-
+                await oService.SubmitTimeSheet(oModel);
+                await GetData();
             }
             catch (Exception ex)
             {
                 ErrorMessage("Something went wrong.");
             }
+            flgBusy = false;
         }
 
         public async Task CancelSheets()
         {
+            flgBusy = true;
             try
             {
-
+                await oService.CancelTimeSheet(oModel);
+                await GetData();
             }
             catch (Exception ex)
             {
                 ErrorMessage("Something went wrong.");
             }
+            flgBusy = false;
         }
 
         public async Task GotoTimeSheetAdd()

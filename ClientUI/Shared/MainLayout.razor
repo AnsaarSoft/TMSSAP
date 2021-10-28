@@ -6,12 +6,14 @@
 
 <MudLayout>
 
-    <MudAppBar Color="Color.Primary" Fixed="false" Elevation="2">
+    <MudAppBar Color="Color.Primary" Fixed="false" Elevation="1">
 
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e)=> DrawToggle())"></MudIconButton>
         <MudText Typo="Typo.h5" Class="ml-3">Time Sheet</MudText>
         <MudSpacer />
-        <MudIconButton Icon="@Icons.Material.Rounded.PersonAdd" Color="Color.Inherit" Edge="Edge.End" OnClick="GotoLogin" />
+        <MudText Typo="Typo.h6" Class="ml-3">Employee Name</MudText>
+        <MudIconButton Icon="@Icons.Material.Rounded.AllOut" Color="Color.Inherit" Edge="Edge.End" OnClick="LogOut" />
+
     </MudAppBar>
     <MudDrawer @bind-Open="@flgSideToggle" Elevation="1">
         <NavMenu />

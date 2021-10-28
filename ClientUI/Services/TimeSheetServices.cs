@@ -15,7 +15,8 @@ namespace ClientUI.Services
         Task Initiallize();
         Task<List<TimeSheet>> GetUserTimeSheet(vmTimeSheet oSheet);
         Task<vmAddTime> AddTimeSheet(vmAddTime oTime);
-        Task<vmTimeSheet> SubmitTimeSheet(vmTimeSheet oTime);
+        Task<vmTimeSheet> SubmitTimeSheet(vmTimeSheet oSheet);
+        Task<vmTimeSheet> CancelTimeSheet(vmTimeSheet oSheet);
     }
     public class TimeSheetServices : ITimeSheetServices
     {
@@ -52,10 +53,10 @@ namespace ClientUI.Services
                 }
                 var Request = new RestRequest("/timesheet/getdatabyuser").AddJsonBody(oSheet);
                 
-                var Response = await oClient.PostAsync<vmTimeSheet>(Request);
-                if (Response.flgSuccess)
+                var Response = await oClient.PostAsync<List<TimeSheet>>(Request);
+                if (Response.Count > 0)
                 {
-                    oCollection = Response.oCollection;
+                    oCollection = Response;
                 }
                 else
                 {
@@ -112,7 +113,37 @@ namespace ClientUI.Services
                 {
                     return null;
                 }
-                var Request = new RestRequest("/timesheet/addtime").AddJsonBody(oSheet);
+                var Request = new RestRequest("/timesheet/submitsheet").AddJsonBody(oSheet);
+                var Response = await oClient.PostAsync<vmTimeSheet>(Request);
+                if (Response.flgSuccess)
+                {
+                    return Response;
+                }
+                else
+                {
+                    return Response;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<vmTimeSheet> CancelTimeSheet(vmTimeSheet oSheet)
+        {
+            try
+            {
+                await Initiallize();
+                if (oUser != null)
+                {
+                    oSheet.oUser = oUser.User;
+                }
+                else
+                {
+                    return null;
+                }
+                var Request = new RestRequest("/timesheet/cancelsheet").AddJsonBody(oSheet);
                 var Response = await oClient.PostAsync<vmTimeSheet>(Request);
                 if (Response.flgSuccess)
                 {

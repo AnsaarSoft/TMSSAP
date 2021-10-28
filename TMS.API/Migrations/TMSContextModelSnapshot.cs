@@ -125,6 +125,9 @@ namespace TMS.API.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("flgSuper")
+                        .HasColumnType("bit");
+
                     b.HasKey("ID");
 
                     b.ToTable("Users");
@@ -138,7 +141,8 @@ namespace TMS.API.Migrations
                             Password = "123",
                             SBOId = "",
                             UserCode = "admin",
-                            UserName = "MFM"
+                            UserName = "MFM",
+                            flgSuper = false
                         });
                 });
 #pragma warning restore 612, 618
