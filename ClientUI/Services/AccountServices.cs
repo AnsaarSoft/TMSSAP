@@ -16,6 +16,9 @@ namespace ClientUI.Services
         Task Initiallize();
         Task<bool> Login(User pUser);
         Task<bool> Logout();
+        Task<User> AddUser(User pUser);
+        Task<User> UpdateUser(User pUser);
+        Task<List<User>> GetAllUser();
     }
 
     public class AccountServices : IAccountServices
@@ -73,6 +76,58 @@ namespace ClientUI.Services
             {
                 return false;
             }
+        }
+
+        public async Task<User> AddUser(User pUser)
+        {
+            User oUser;
+            try
+            {
+                var Request = new RestRequest("/account/add").AddJsonBody(pUser);
+                var Response = await oClient.PostAsync<User>(Request);
+                if (Response != null)
+                    oUser = Response;
+                else
+                    oUser = null;
+            }
+            catch (Exception)
+            {
+                oUser = null;
+            }
+            return oUser;
+        }
+
+        public async Task<User> UpdateUser(User pUser)
+        {
+            User oUser;
+            try
+            {
+                var Request = new RestRequest("/account/update").AddJsonBody(pUser);
+                var Response = await oClient.PostAsync<User>(Request);
+                if (Response != null)
+                    oUser = Response;
+                else
+                    oUser = null;
+            }
+            catch (Exception)
+            {
+                oUser = null;
+            }
+            return oUser;
+        }
+
+        public async Task<List<User>> GetAllUser()
+        {
+            List<User> oList = new List<User>();
+            try
+            {
+                var Request = new RestRequest("/account/getall");
+                oList = await oClient.GetAsync<List<User>>(Request);
+            }
+            catch (Exception)
+            {
+            }
+            return oList;
         }
 
     }

@@ -21,9 +21,8 @@ namespace TMS.API.Controllers
         {
             oUserRepository = userRepository;
         }
-
-        [Route("login")]
-        [HttpPost]
+        
+        [HttpPost, Route("login")]
         public async Task<IActionResult> Login([FromBody] User user)
         {
             try
@@ -47,7 +46,69 @@ namespace TMS.API.Controllers
                 return BadRequest("Invalid user or password.");
             }
         }
+        
+        [HttpPost, Route("add")]
+        public async Task<IActionResult> AddUser([FromBody] User user)
+        {
+            try
+            {
+                var oUser = await oUserRepository.AddUser(user);
+                if (oUser != null)
+                {
+                    return Ok(oUser);
+                }
+                else
+                {
+                    return BadRequest("Invalid user or password.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Invalid user or password.");
+            }
+        }
 
+        [HttpPost, Route("update")]
+        public async Task<IActionResult> UpdateUser([FromBody] User user)
+        {
+            try
+            {
+                var oUser = await oUserRepository.UpdateUser(user);
+                if (oUser != null)
+                {
+                    return Ok(oUser);
+                }
+                else
+                {
+                    return BadRequest("Invalid user or password.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Invalid user or password.");
+            }
+        }
+
+        [HttpGet, Route("getall")]
+        public async Task<IActionResult> GetAllUser()
+        {
+            try
+            {
+                var oCollection = await oUserRepository.GetAllUsers();
+                if (oCollection != null)
+                {
+                    return Ok(oCollection);
+                }
+                else
+                {
+                    return BadRequest("Invalid user or password.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Invalid user or password.");
+            }
+        }
 
     }
 }

@@ -1,11 +1,11 @@
 ﻿@inherits LayoutComponentBase
-<div>
-    <MudThemeProvider />
-    <MudDialogProvider />
-    <MudSnackbarProvider />
-</div>
-<div>
-    <div class="d-flex justify-content-center">
-        @Body
-    </div>
-</div>
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<MudLayout>
+    <MudMainContent>
+        <MudContainer>
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
