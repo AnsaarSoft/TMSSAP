@@ -31,7 +31,7 @@ namespace TMS.API.Controllers
                 var ListValue = await oTimeSheetRepository.GetUserData(oSheet);
                 if (ListValue != null)
                 {
-                    return Ok(oSheet);
+                    return Ok(ListValue);
                 }
                 else
                 {
@@ -55,10 +55,14 @@ namespace TMS.API.Controllers
                 {
                     if(oSheet.oTime.flgLeave)
                     {
+                        oSheet.oLeave.rTimeSheet = flgSuccessTime.ID;
+                        oSheet.oLeave.rUser = flgSuccessTime.rUser;
                         var flgSuccessLeave = await oTimeSheetRepository.AddLeave(oSheet);
                     }
                     if(oSheet.oTime.flgBreak)
                     {
+                        oSheet.oBreak.rTimeSheet = flgSuccessTime.ID;
+                        oSheet.oBreak.rUser = flgSuccessTime.ID;
                         var flgSuccessBreak = await oTimeSheetRepository.AddBreak(oSheet);
                     }
                     return Ok(oSheet);

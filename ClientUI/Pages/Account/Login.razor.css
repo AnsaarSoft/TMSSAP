@@ -1,6 +1,13 @@
 ﻿.centerlogin {
-    width: 400px;
+    width: 500px;
     height: 300px;
-    display: flex;
+    margin-left: 400px;
+    margin-top: 200px;
     justify-content: center;
+}
+
+.headerfont {
+    font-family: Roboto;
+    font-display: block;
+    padding: 10px;
 }

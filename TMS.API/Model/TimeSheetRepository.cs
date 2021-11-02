@@ -56,7 +56,7 @@ namespace TMS.API.Model
                                        where a.DayDate.Date == oNew.DayDate.Date
                                        && a.rUser == oNew.rUser
                                        select a).FirstOrDefaultAsync();
-                if (CheckTime != null)
+                if (CheckTime != null && CheckTime.Status != "Cancelled")
                     return null;
                 oNew.Status = "Draft";
                 await dbContext.TimeSheets.AddAsync(oNew);
@@ -124,8 +124,30 @@ namespace TMS.API.Model
                                    where a.ID == One.ID
                                    select a).FirstOrDefaultAsync();
                     if (oRecord == null) continue;
-                    if (oRecord.Status != "Draft") continue;
-                    oRecord.Status = "Posted";
+                    if (oRecord.Status == "Draft")
+                    {
+                        oRecord.Status = "Posted";
+                        if(oRecord.flgLeave)
+                        {
+                            var oLeave = await (from a in dbContext.LeaveTimes
+                                                where a.rTimeSheet == oRecord.ID
+                                                && a.rUser == oRecord.rUser
+                                                select a).FirstOrDefaultAsync();
+                            if (oLeave != null)
+                            {
+                                var oUser = await (from a in dbContext.Users
+                                                   where a.ID == oRecord.rUser
+                                                   select a).FirstOrDefaultAsync();
+                                if (oUser != null)
+                                {
+                                    TimeSpan Hours = oLeave.EndTime - oLeave.StartTime;
+                                    oUser.LeaveHours -= Hours.TotalHours;
+                                    dbContext.Entry<User>(oUser).State = EntityState.Modified;
+                                }
+                            }
+                 
+                        }
+                    }
                     dbContext.Entry<TimeSheet>(oRecord).State = EntityState.Modified;
                 }
                 await dbContext.SaveChangesAsync();
