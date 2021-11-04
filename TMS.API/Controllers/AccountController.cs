@@ -43,7 +43,7 @@ namespace TMS.API.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest("Invalid user or password.");
+                return BadRequest($"Internal Server error. {ex.Message}");
             }
         }
         
@@ -64,7 +64,7 @@ namespace TMS.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Invalid user or password.");
+                return BadRequest($"Internal server error. {ex.Message}");
             }
         }
 
@@ -85,7 +85,7 @@ namespace TMS.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Invalid user or password.");
+                return BadRequest($"Internal server error. {ex.Message}");
             }
         }
 
@@ -106,7 +106,7 @@ namespace TMS.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Invalid user or password.");
+                return BadRequest($"Internal server error. {ex.Message} ");
             }
         }
 

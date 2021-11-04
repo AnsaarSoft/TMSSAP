@@ -1,7 +1,15 @@
 ﻿@page "/timesheet/addtime"
 @layout MainLayout
 
-<MudCard>
+
+<MudCard Elevation="2">
+    <MudCardContent>
+        <MudBreadcrumbs Items="oBreadList" Separator=">"></MudBreadcrumbs>
+    </MudCardContent>
+</MudCard>
+<MudDivider />
+
+<MudCard Elevation="2">
     <MudCardContent>
         <MudContainer>
             <MudGrid>
@@ -20,10 +28,10 @@
                     <MudSwitch @bind-Checked="flgLeave" Color="Color.Primary">Leave Toggle</MudSwitch>
                 </MudItem>
                 <MudItem xs="12" sm="6" md="4">
-                    <MudTimePicker Label="Start Time" @bind-Time="LeaveStartTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgLeave"/>
+                    <MudTimePicker Label="Start Time" @bind-Time="LeaveStartTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgLeave" />
                 </MudItem>
                 <MudItem xs="12" sm="6" md="4">
-                    <MudTimePicker Label="End Time" @bind-Time="LeaveEndTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgLeave"/>
+                    <MudTimePicker Label="End Time" @bind-Time="LeaveEndTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgLeave" />
                 </MudItem>
             </MudGrid>
             <MudGrid>
@@ -31,10 +39,10 @@
                     <MudSwitch @bind-Checked="flgBreak" Color="Color.Primary">Break Toggle</MudSwitch>
                 </MudItem>
                 <MudItem xs="12" sm="6" md="4">
-                    <MudTimePicker Label="Start Time" @bind-Time="BreakStartTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgBreak"/>
+                    <MudTimePicker Label="Start Time" @bind-Time="BreakStartTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgBreak" />
                 </MudItem>
                 <MudItem xs="12" sm="6" md="4">
-                    <MudTimePicker Label="End Time" @bind-Time="BreakEndTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgBreak"/>
+                    <MudTimePicker Label="End Time" @bind-Time="BreakEndTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgBreak" />
                 </MudItem>
             </MudGrid>
             <MudGrid>

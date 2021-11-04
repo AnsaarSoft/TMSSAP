@@ -25,6 +25,11 @@ namespace ClientUI.Pages.Account
         bool isShow;
         InputType PasswordInput = InputType.Password;
         string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+        private List<BreadcrumbItem> oBreadList = new List<BreadcrumbItem>
+        {
+            new BreadcrumbItem ("Home", href:"/"),
+            new BreadcrumbItem ("User List", href:"/account/userlist")
+        };
 
         [Inject]
         IAccountServices oService { get; set; }

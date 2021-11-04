@@ -38,7 +38,8 @@ namespace TMS.API.Model
             }
             catch (Exception ex)
             {
-
+                Logs o = new Logs();
+                o.Logger(ex);
             }
             return rUser;
         }
@@ -55,6 +56,8 @@ namespace TMS.API.Model
             catch (Exception ex)
             {
                 rUser = null;
+                Logs o = new Logs();
+                o.Logger(ex);
             }
             return rUser;
         }
@@ -71,6 +74,8 @@ namespace TMS.API.Model
             catch (Exception ex)
             {
                 rUser = null;
+                Logs o = new Logs();
+                o.Logger(ex);
             }
             return rUser;
         }
@@ -86,6 +91,8 @@ namespace TMS.API.Model
             catch (Exception ex)
             {
                 oCollection = null;
+                Logs o = new Logs();
+                o.Logger(ex);
             }
             return oCollection;
         }

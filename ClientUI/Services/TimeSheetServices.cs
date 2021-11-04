@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using RestSharp;
 using TMS.Models.Model;
 using TMS.Models.ViewModel;
+using Microsoft.Extensions.Configuration;
 
 namespace ClientUI.Services
 {
@@ -23,12 +24,15 @@ namespace ClientUI.Services
         public vmUser oUser { get; private set; }
         private ILocalStorageService oStorageService;
         private IRestClient oClient;
+        private IConfiguration oConfig;
 
-        public TimeSheetServices(ILocalStorageService localStorageService, IRestClient restClient)
+        public TimeSheetServices(ILocalStorageService localStorageService, IRestClient restClient, IConfiguration configuration)
         {
+            oConfig = configuration;
+            string value = oConfig.GetValue<string>("APIBase");
             oStorageService = localStorageService;
             oClient = restClient;
-            oClient.BaseUrl = new Uri("http://localhost:56388/api/");
+            oClient.BaseUrl = new Uri(value);
         }
 
         public async Task Initiallize()

@@ -28,6 +28,12 @@ namespace ClientUI.Pages.TimeSheet
 
         vmAddTime oModel = new vmAddTime();
 
+        private List<BreadcrumbItem> oBreadList = new List<BreadcrumbItem>
+        {
+            new BreadcrumbItem ("Home", href:"/"),
+            new BreadcrumbItem ("New Time Sheets", href:"/timesheet/addtime")
+        };
+
         [Inject]
         ITimeSheetServices oService { get; set; }
         [Inject]

@@ -4,61 +4,71 @@
 @if (oCollection.Count > 0)
 {
 
-<MudCard>
-    <MudCardContent>
-        <MudContainer>
-            <MudGrid>
-                <MudItem xs="12" sm="6" md="4">
-                    <MudTextField @bind-Value="oModel.UserCode" Label="User Code" Variant="Variant.Outlined"></MudTextField>
-                </MudItem>
-                <MudItem xs="12" sm="6" md="4">
-                    <MudTextField @bind-Value="oModel.UserName" Label="User Name" Variant="Variant.Outlined"></MudTextField>
-                </MudItem>
-                <MudItem xs="12" sm="6" md="4">
-                    <MudTextField @bind-Value="oModel.Password" Label="Password" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="PasswordShowToggle" />
-                </MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem xs="12" sm="6" md="4">
-                    <MudTextField @bind-Value="oModel.Email" Label="Email" Variant="Variant.Outlined"></MudTextField>
-                </MudItem>
-                <MudItem xs="12" sm="6" md="4">
-                    <MudTextField @bind-Value="oModel.SBOId" Label="Sbo ID" Variant="Variant.Outlined"></MudTextField>
-                </MudItem>
-                <MudItem xs="12" sm="6" md="4">
-                    <MudTextField @bind-Value="oModel.LeaveHours" Label="Leave Hour" Variant="Variant.Outlined"></MudTextField>
-                </MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem xs="12" sm="6" md="4">
-                    <MudSwitch @bind-Checked="oModel.flgSuper" Label="Super User" Color="Color.Primary" />
-                </MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem>
-                    <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="SaveUser" Disabled="flgBusy">Save</MudButton>
-                </MudItem>
-                <MudItem>
-                    <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="CancelUser">Cancel</MudButton>
-                </MudItem>
-            </MudGrid>
+    <MudCard Elevation="2">
+        <MudCardContent>
+            <MudBreadcrumbs Items="oBreadList" Separator=">"></MudBreadcrumbs>
+        </MudCardContent>
+    </MudCard>
+    <MudDivider />
 
-            <MudGrid>
-                <MudItem xs="12" sm="6" md="12">
-                    <MudTable Items="oCollection" Hover="true" OnRowClick="SelectedRow" T="User">
-                        <HeaderContent>
-                            <MudTh>UserCode</MudTh>
-                            <MudTh>UserName</MudTh>
-                            <MudTh>Email</MudTh>
-                            <MudTh>Admin User</MudTh>
-                        </HeaderContent>
-                        <RowTemplate>
-                            <MudTd DataLabel="User Code">@context.UserCode </MudTd>
-                            <MudTd DataLabel="User Name">@context.UserName </MudTd>
-                            <MudTd DataLabel="Email">@context.Email</MudTd>
-                            <MudTd DataLabel="Admin User">@if (context.flgSuper)
-                            {<MudChip Color="Color.Success">Active</MudChip>}
-                            else { <MudChip Color="Color.Default">InActive</MudChip> }</MudTd>
+    <MudCard Elevation="2">
+        <MudCardContent>
+            <MudContainer>
+                <MudGrid>
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudTextField @bind-Value="oModel.UserCode" Label="User Code" Variant="Variant.Outlined"></MudTextField>
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudTextField @bind-Value="oModel.UserName" Label="User Name" Variant="Variant.Outlined"></MudTextField>
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudTextField @bind-Value="oModel.Password" Label="Password" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="PasswordShowToggle" />
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudTextField @bind-Value="oModel.Email" Label="Email" Variant="Variant.Outlined"></MudTextField>
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudTextField @bind-Value="oModel.SBOId" Label="Sbo ID" Variant="Variant.Outlined"></MudTextField>
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudTextField @bind-Value="oModel.LeaveHours" Label="Leave Hour" Variant="Variant.Outlined"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudSwitch @bind-Checked="oModel.flgSuper" Label="Super User" Color="Color.Primary" />
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem>
+                        <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="SaveUser" Disabled="flgBusy">Save</MudButton>
+                    </MudItem>
+                    <MudItem>
+                        <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="CancelUser">Cancel</MudButton>
+                    </MudItem>
+                </MudGrid>
+
+                <MudGrid>
+                    <MudItem xs="12" sm="6" md="12">
+                        <MudTable Items="oCollection" Hover="true" OnRowClick="SelectedRow" T="User">
+                            <HeaderContent>
+                                <MudTh>UserCode</MudTh>
+                                <MudTh>UserName</MudTh>
+                                <MudTh>Email</MudTh>
+                                <MudTh>Admin User</MudTh>
+                            </HeaderContent>
+                            <RowTemplate>
+                                <MudTd DataLabel="User Code">@context.UserCode </MudTd>
+                                <MudTd DataLabel="User Name">@context.UserName </MudTd>
+                                <MudTd DataLabel="Email">@context.Email</MudTd>
+                                <MudTd DataLabel="Admin User">
+                                    @if (context.flgSuper)
+                                    {<MudChip Color="Color.Success">Active</MudChip>}
+                                    else
+                                    { <MudChip Color="Color.Default">InActive</MudChip>}
+                            </MudTd>
                         </RowTemplate>
 
                     </MudTable>
@@ -68,8 +78,8 @@
         </MudContainer>
     </MudCardContent>
 </MudCard> }
-            else
-            {
+else
+{
 <div>
     Loading...
 </div>}

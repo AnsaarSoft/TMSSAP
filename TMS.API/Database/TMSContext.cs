@@ -21,7 +21,7 @@ namespace TMS.API.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(
-                new User() { ID = 1, UserCode="admin", UserName="MFM", Email="mfmjnj@gmail.com", Password="123", LeaveHours=80, SBOId=""});
+                new User() { ID = 1, UserCode="admin", UserName="admin", Email="admin@admin.com", Password="123", LeaveHours=80, SBOId=""});
         }
         //entities
         public DbSet<User> Users { get; set; }

@@ -20,12 +20,20 @@ namespace ClientUI.Pages.TimeSheet
 
         vmTimeSheet oModel = new vmTimeSheet();
 
+        private List<BreadcrumbItem> oBreadList = new List<BreadcrumbItem>
+        {
+            new BreadcrumbItem ("Home", href:"/"),
+            new BreadcrumbItem ("Time Sheets", href:"/timesheet/dailytimesheet")
+        };
+
         [Inject]
         ITimeSheetServices oService { get; set; }
         [Inject]
         NavigationManager oNavigation { get; set; }
         [Inject]
         ISnackbar toast { get; set; }
+
+
 
         #endregion
 

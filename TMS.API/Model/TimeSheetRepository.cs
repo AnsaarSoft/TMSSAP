@@ -118,6 +118,8 @@ namespace TMS.API.Model
         {
             try
             {
+                if (oSheet.oSelected == null)
+                    return;
                 foreach(var One in oSheet.oSelected)
                 {
                     var oRecord = await (from a in dbContext.TimeSheets
@@ -161,6 +163,8 @@ namespace TMS.API.Model
         {
             try
             {
+                if (oSheet.oSelected == null)
+                    return;
                 foreach (var One in oSheet.oSelected)
                 {
                     var oRecord = await (from a in dbContext.TimeSheets

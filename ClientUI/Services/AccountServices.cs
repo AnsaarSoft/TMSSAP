@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using RestSharp;
 using TMS.Models.Model;
 using TMS.Models.ViewModel;
+using Microsoft.Extensions.Configuration;
 
 namespace ClientUI.Services
 {
@@ -26,12 +27,15 @@ namespace ClientUI.Services
         public vmUser oUser { get; private set; }
         private ILocalStorageService oStorageService;
         private IRestClient oClient;
+        private IConfiguration oConfig;
 
-        public AccountServices(ILocalStorageService localStorageService, IRestClient restClient)
+        public AccountServices(ILocalStorageService localStorageService, IRestClient restClient, IConfiguration configuration)
         {
+            oConfig = configuration;
             oStorageService = localStorageService;
+            string value = oConfig.GetValue<string>("APIBase");
             oClient = restClient;
-            oClient.BaseUrl = new Uri("http://localhost:56388/api/");
+            oClient.BaseUrl = new Uri(value);
         }
 
 
@@ -59,8 +63,9 @@ namespace ClientUI.Services
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+
                 return false;
             }
         }

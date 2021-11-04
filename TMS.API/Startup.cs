@@ -32,7 +32,7 @@ namespace TMS.API
             services.AddDbContext<TMSContext>(op => op.UseSqlServer(Configuration.GetConnectionString("TMSDB")));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITimeSheetRepository, TimeSheetRepository>();
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TMS.API", Version = "v1" });
@@ -45,9 +45,9 @@ namespace TMS.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TMS.API v1"));
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TMS.API v1"));
 
             app.UseRouting();
 
