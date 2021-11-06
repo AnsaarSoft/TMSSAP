@@ -24,7 +24,7 @@ namespace ClientUI.Helpers
             var authorize = Attribute.GetCustomAttribute(RouteData.PageType, typeof(AuthorizeAttribute)) != null;
             if (authorize && AccountService.oUser == null)
             {
-                NavigationManager.NavigateTo($"account/login");
+                NavigationManager.NavigateTo($"/account/login");
             }
             else
             {

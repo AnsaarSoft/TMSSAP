@@ -1,18 +1,33 @@
 ﻿@page "/timesheet/userreport"
 @layout MainLayout
 
-<MudCard>
+
+<MudCard Elevation="2">
+    <MudCardContent>
+        <MudBreadcrumbs Items="oBreadList" Separator=">"></MudBreadcrumbs>
+    </MudCardContent>
+</MudCard>
+
+<MudDivider />
+<MudSpacer />
+
+<MudCard Elevation="2">
     <MudCardContent>
         <MudContainer>
             <MudGrid>
                 <MudItem xs="12" sm="6" md="4">
-                    
+                    <MudSelect Label="Select user" Placeholder="Users" @bind-Value="oUser" Variant="Variant.Outlined">
+                        @foreach (var One in UserList)
+                        {
+                            <MudSelectItem Value="@One">@One.UserName</MudSelectItem>
+                        }
+                    </MudSelect>
                 </MudItem>
                 <MudItem xs="12" sm="6" md="4">
-                    
+                    <MudDatePicker Label="From Date" @bind-Date="FromDate" />
                 </MudItem>
                 <MudItem xs="12" sm="6" md="4">
-                    
+                    <MudDatePicker Label="To Date" @bind-Date="ToDate" />
                 </MudItem>
             </MudGrid>
             <MudGrid>
@@ -20,7 +35,98 @@
                     <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="ShowReport" Disabled="flgBusy">Show</MudButton>
                 </MudItem>
             </MudGrid>
+            <MudGrid>
+                <MudItem>
+                    <MudTable Items="TimesheetList" Context="SheetContext" Hover="true" Breakpoint="Breakpoint.Sm" Striped="true">
+                        <ColGroup>
+                            <col style="width:300px;" />
+                            <col style="width:100px;" />
+                            <col style="width:100px;" />
+                            <col style="width:180px;" />
+                            <col style="width:180px;" />
+                        </ColGroup>
+                        <HeaderContent>
+                            <MudTh>User Name</MudTh>
+                            <MudTh>Day Date</MudTh>
+                            <MudTh>Total Hour</MudTh>
+                            <MudTh></MudTh>
+                            <MudTh></MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd>@SheetContext.UserName</MudTd>
+                            <MudTd>@SheetContext.DayDate</MudTd>
+                            <MudTd>@SheetContext.TotalHour</MudTd>
+                            <MudTd>
+                                <MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="@( () => ShowLeaveDetails(SheetContext.ID))">@(SheetContext.flgShowLeave ? "Hide" : "Show") Leave Details</MudButton>
+                            </MudTd>
+                            <MudTd>
+                                <MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="@( () => ShowBreakDetails(SheetContext.ID))">@(SheetContext.flgShowBreak ? "Hide" : "Show") Break Details</MudButton>
+                            </MudTd>
+                        </RowTemplate>
+                        <ChildRowContent>
+                            @if (SheetContext.flgShowLeave)
+                            {
+                                <MudTr>
+                                    <td colspan="4">
+                                        <MudCard>
+                                            <MudCardContent>
+                                                <MudTable Items="SheetContext.LeavesList" Context="LDContext" Hover="true" Striped="true" Breakpoint="Breakpoint.Sm">
+                                                    <ColGroup>
+                                                        <col style="width:100px;" />
+                                                        <col style="width:100px;" />
+                                                        <col style="width:100px;" />
+                                                    </ColGroup>
+                                                    <HeaderContent>
+                                                        <MudTh>Start</MudTh>
+                                                        <MudTh>End</MudTh>
+                                                        <MudTh>Total Hour</MudTh>
+                                                    </HeaderContent>
+                                                    <RowTemplate>
+                                                        <MudTd>@LDContext.StartTime</MudTd>
+                                                        <MudTd>@LDContext.EndTime</MudTd>
+                                                        <MudTd>@LDContext.TotalHour</MudTd>
+                                                    </RowTemplate>
+                                                </MudTable>
+                                            </MudCardContent>
+                                </MudCard>
+                                    </td>
+                                </MudTr>
+                            }
+                            @if (SheetContext.flgShowBreak)
+                            {
+                                <MudTr>
+                                    <td colspan="4">
+                                        <MudCard Elevation="0">
+                                            <MudCardContent>
+                                                <MudTable Items="SheetContext.BreaksList" Context="BDContext" Hover="true" Striped="true" Breakpoint="Breakpoint.Sm">
+                                                    <ColGroup>
+                                                        <col style="width:100px;" />
+                                                        <col style="width:100px;" />
+                                                        <col style="width:100px;" />
+                                                    </ColGroup>
+                                                    <HeaderContent>
+                                                        <MudTh>Start</MudTh>
+                                                        <MudTh>End</MudTh>
+                                                        <MudTh>Total Hour</MudTh>
+                                                    </HeaderContent>
+                                                    <RowTemplate>
+                                                        <MudTd>@BDContext.StartTime</MudTd>
+                                                        <MudTd>@BDContext.EndTime</MudTd>
+                                                        <MudTd>@BDContext.TotalHour</MudTd>
+                                                    </RowTemplate>
+                                                </MudTable>
+                                            </MudCardContent>
+                                        </MudCard>
+                                    </td>
+                                </MudTr>
+                            }
+                        </ChildRowContent>
+                    </MudTable>
+                </MudItem>
+            </MudGrid>
 
         </MudContainer>
     </MudCardContent>
 </MudCard>
+
+

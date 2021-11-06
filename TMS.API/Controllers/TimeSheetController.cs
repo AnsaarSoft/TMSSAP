@@ -109,5 +109,21 @@ namespace TMS.API.Controllers
             }
         }
 
+        [HttpGet, Route("getuserreport")]
+        public async Task<IActionResult> GetUserReport(string prmFrom, string prmTo,  int prmUser, string prmUserName)
+        {
+            try
+            {
+                DateTime fromdate = Convert.ToDateTime(prmFrom);
+                DateTime todate = Convert.ToDateTime(prmTo);
+                List<vmReportSheet> TimeSheetList = await oTimeSheetRepository.GetUserReport(fromdate, todate, prmUser, prmUserName);                
+                return Ok(TimeSheetList);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Some went wrong.");
+            }
+        }
+
     }
 }

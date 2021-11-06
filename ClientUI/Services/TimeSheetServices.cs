@@ -18,6 +18,7 @@ namespace ClientUI.Services
         Task<vmAddTime> AddTimeSheet(vmAddTime oTime);
         Task<vmTimeSheet> SubmitTimeSheet(vmTimeSheet oSheet);
         Task<vmTimeSheet> CancelTimeSheet(vmTimeSheet oSheet);
+        Task<List<vmReportSheet>> GetUserReport(string prmFrom, string prmTo, int prmUserId, string prmUserName);
     }
     public class TimeSheetServices : ITimeSheetServices
     {
@@ -164,7 +165,30 @@ namespace ClientUI.Services
             }
         }
 
-
+        public async Task<List<vmReportSheet>> GetUserReport(string prmFrom, string prmTo, int prmUserId, string prmUserName)
+        {
+            try
+            {
+                var Request = new RestRequest("/timesheet/getuserreport")
+                    .AddParameter("prmFrom", prmFrom)
+                    .AddParameter("prmTo", prmTo)
+                    .AddParameter("prmUser", prmUserId)
+                    .AddParameter("prmUserName", prmUserName);
+                List<vmReportSheet> Response = await oClient.GetAsync<List<vmReportSheet>>(Request);
+                if (Response != null)
+                {
+                    return Response;
+                }
+                else
+                {
+                    return Response;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
     }
 }

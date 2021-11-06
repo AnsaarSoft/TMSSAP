@@ -17,6 +17,7 @@ namespace TMS.API.Model
         Task<BreakTime> AddBreak(vmAddTime pTime);
         Task SubmitTimeSheet(vmTimeSheet oSheet);
         Task CancelTimeSheet(vmTimeSheet oSheet);
+        Task<List<vmReportSheet>> GetUserReport(DateTime prmFrom, DateTime prmTo, int prmUser, string prmUserName);
     }
 
     public class TimeSheetRepository : ITimeSheetRepository
@@ -180,6 +181,70 @@ namespace TMS.API.Model
             catch (Exception ex)
             {
             }
+        }
+
+        public async Task<List<vmReportSheet>> GetUserReport(DateTime prmFrom, DateTime prmTo, int prmUser, string prmUserName)
+        {
+            List<vmReportSheet> oCollection;
+            try
+            {
+                oCollection = new List<vmReportSheet>();
+                var oTimeCollection = await (from a in dbContext.TimeSheets
+                                       where a.rUser == prmUser
+                                       && a.DayDate.Date >= prmFrom.Date
+                                       && a.DayDate.Date <= prmTo.Date
+                                       select a).ToListAsync();
+                foreach(var Line in oTimeCollection)
+                {
+                    vmReportSheet oRecord = new vmReportSheet();
+                    oRecord.ID = Line.ID;
+                    oRecord.UserName = prmUserName;
+                    oRecord.DayDate = Line.DayDate.ToString("dd/MM/yyyy");
+                    oRecord.StartTime = Line.StartTime.ToString("hh:mm tt");
+                    oRecord.EndTime = Line.EndTime.ToString("hh:mm tt");
+                    TimeSpan spantime = Line.EndTime - Line.StartTime;
+                    oRecord.TotalHour = spantime.TotalHours;
+                    oRecord.flgShowBreak = false;
+                    oRecord.flgShowLeave = false;
+
+                    oRecord.LeavesList = new List<vmLeaves>();
+                    oRecord.BreaksList = new List<vmBreaks>();
+
+                    var oLeaveList = await (from a in dbContext.LeaveTimes
+                                            where a.rTimeSheet == Line.ID
+                                            select a).ToListAsync();
+
+                    foreach(var LeaveLine in oLeaveList)
+                    {
+                        vmLeaves oLeave = new vmLeaves();
+                        oLeave.StartTime = LeaveLine.StartTime.ToString("hh:mm tt");
+                        oLeave.EndTime = LeaveLine.EndTime.ToString("hh:mm tt");
+                        TimeSpan span = LeaveLine.EndTime - LeaveLine.StartTime;
+                        oLeave.TotalHour = span.TotalHours;
+                        oRecord.LeavesList.Add(oLeave);
+                    }
+
+                    var oBreakList = await (from a in dbContext.BreakTimes
+                                            where a.rTimeSheet == Line.ID
+                                            select a).ToListAsync();
+
+                    foreach (var BreakLine in oBreakList)
+                    {
+                        vmBreaks oBreak = new vmBreaks();
+                        oBreak.StartTime = BreakLine.StartTime.ToString("hh:mm tt");
+                        oBreak.EndTime = BreakLine.EndTime.ToString("hh:mm tt");
+                        TimeSpan span = BreakLine.EndTime - BreakLine.StartTime;
+                        oBreak.TotalHour = span.TotalHours;
+                        oRecord.BreaksList.Add(oBreak);
+                    }
+                    oCollection.Add(oRecord);
+                }
+            }
+            catch (Exception ex)
+            {
+                oCollection = null;
+            }
+            return oCollection;
         }
 
     }
