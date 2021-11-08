@@ -1,4 +1,5 @@
-﻿using ClientUI.Services;
+﻿using ClientUI.Helpers;
+using ClientUI.Services;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System;
@@ -84,6 +85,7 @@ namespace ClientUI.Pages.TimeSheet
             catch (Exception ex)
             {
                 ErrorMessage("Something went wrong.");
+                Logs.Logger(ex);
             }
             flgBusy = false;
         }

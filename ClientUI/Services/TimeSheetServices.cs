@@ -7,6 +7,7 @@ using RestSharp;
 using TMS.Models.Model;
 using TMS.Models.ViewModel;
 using Microsoft.Extensions.Configuration;
+using ClientUI.Helpers;
 
 namespace ClientUI.Services
 {
@@ -38,7 +39,14 @@ namespace ClientUI.Services
 
         public async Task Initiallize()
         {
-            oUser = await oStorageService.GetItemAsync<vmUser>("user");
+            try
+            {
+                oUser = await oStorageService.GetItemAsync<vmUser>("user");
+            }
+            catch (Exception ex)
+            {
+                Logs.Logger(ex);
+            }
         }
 
         public async Task<List<TimeSheet>> GetUserTimeSheet(vmTimeSheet oSheet)
@@ -70,6 +78,7 @@ namespace ClientUI.Services
             }
             catch (Exception ex)
             {
+                Logs.Logger(ex);
                 oCollection = null;
             }
             return oCollection;
@@ -101,6 +110,7 @@ namespace ClientUI.Services
             }
             catch (Exception ex)
             {
+                Logs.Logger(ex);
                 return null;
             }
         }
@@ -131,6 +141,7 @@ namespace ClientUI.Services
             }
             catch (Exception ex)
             {
+                Logs.Logger(ex);
                 return null;
             }
         }
@@ -161,6 +172,7 @@ namespace ClientUI.Services
             }
             catch (Exception ex)
             {
+                Logs.Logger(ex);
                 return null;
             }
         }
@@ -186,6 +198,7 @@ namespace ClientUI.Services
             }
             catch (Exception ex)
             {
+                Logs.Logger(ex);
                 return null;
             }
         }

@@ -7,6 +7,7 @@ using RestSharp;
 using TMS.Models.Model;
 using TMS.Models.ViewModel;
 using Microsoft.Extensions.Configuration;
+using ClientUI.Helpers;
 
 namespace ClientUI.Services
 {
@@ -41,7 +42,14 @@ namespace ClientUI.Services
 
         public async Task Initiallize()
         {
-            oUser = await oStorageService.GetItemAsync<vmUser>("user");
+            try
+            {
+                oUser = await oStorageService.GetItemAsync<vmUser>("user");
+            }
+            catch (Exception ex)
+            {
+                Logs.Logger(ex);
+            }
         }
 
         public async Task<bool> Login(User pUser)
@@ -65,7 +73,7 @@ namespace ClientUI.Services
             }
             catch (Exception ex)
             {
-
+                Logs.Logger(ex);
                 return false;
             }
         }
@@ -77,8 +85,9 @@ namespace ClientUI.Services
                 await oStorageService.RemoveItemAsync("user");
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logs.Logger(ex);
                 return false;
             }
         }
@@ -95,8 +104,9 @@ namespace ClientUI.Services
                 else
                     oUser = null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logs.Logger(ex);
                 oUser = null;
             }
             return oUser;
@@ -114,8 +124,9 @@ namespace ClientUI.Services
                 else
                     oUser = null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logs.Logger(ex);
                 oUser = null;
             }
             return oUser;
@@ -129,8 +140,9 @@ namespace ClientUI.Services
                 var Request = new RestRequest("/account/getall");
                 oList = await oClient.GetAsync<List<User>>(Request);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logs.Logger(ex);
             }
             return oList;
         }

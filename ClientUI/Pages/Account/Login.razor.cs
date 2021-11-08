@@ -37,7 +37,7 @@ namespace ClientUI.Pages.Account
             {
                 message = "You logged in successfully.";
                 SuccessMessage(message);
-                await Task.Delay(2000);
+                await Task.Delay(1000);
                 oNavigation.NavigateTo("/");
             }
             else

@@ -30,9 +30,10 @@ namespace TMS.API.Controllers
                 var oUser = await oUserRepository.ValidateLogin(user);
                 if (oUser != null)
                 {
+                    string token = await oUserRepository.GenerateToken(oUser);
                     ResponseMessage oResponse = new ResponseMessage();
                     oResponse.isSuccess = true;
-                    oResponse.JWTKey = "128jSHu3920kdsk483cnm8472";
+                    oResponse.JWTKey = token;
                     oResponse.UserInfo = oUser;
                     return Ok(oResponse);
                 }

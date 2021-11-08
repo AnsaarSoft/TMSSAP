@@ -1,4 +1,5 @@
-﻿using ClientUI.Services;
+﻿using ClientUI.Helpers;
+using ClientUI.Services;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System;
@@ -17,10 +18,6 @@ namespace ClientUI.Pages.Account
         bool flgBusy = false;
         User oModel = new User();
         List<User> oCollection = new List<User>();
-
-        string usercode { get; set; } = "";
-        string username { get; set; } = "";
-        string password { get; set; } = "";
 
         bool isShow;
         InputType PasswordInput = InputType.Password;
@@ -79,6 +76,7 @@ namespace ClientUI.Pages.Account
             catch (Exception ex)
             {
                 ErrorMessage("Something went wrong.");
+                Logs.Logger(ex);
             }
             flgBusy = false;
         }
@@ -110,9 +108,10 @@ namespace ClientUI.Pages.Account
             {
                 oCollection = await oService.GetAllUser();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 ErrorMessage("Something went wrong.");
+                Logs.Logger(ex);
             }
         }
 

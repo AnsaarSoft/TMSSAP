@@ -1,4 +1,5 @@
-﻿using ClientUI.Services;
+﻿using ClientUI.Helpers;
+using ClientUI.Services;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System;
@@ -62,9 +63,10 @@ namespace ClientUI.Pages.TimeSheet
                     ErrorMessage("Data didn't loaded");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 ErrorMessage("something went wrong.");
+                Logs.Logger(ex);
             }
             flgBusy = false;
         }
@@ -87,9 +89,10 @@ namespace ClientUI.Pages.TimeSheet
                 FromDate = start;
                 ToDate = end;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 ErrorMessage("something went worng.");
+                Logs.Logger(ex);
             }
         }
 
@@ -104,6 +107,7 @@ namespace ClientUI.Pages.TimeSheet
             catch (Exception ex)
             {
                 ErrorMessage("Something went wrong.");
+                Logs.Logger(ex);
             }
             flgBusy = false;
         }
@@ -119,6 +123,7 @@ namespace ClientUI.Pages.TimeSheet
             catch (Exception ex)
             {
                 ErrorMessage("Something went wrong.");
+                Logs.Logger(ex);
             }
             flgBusy = false;
         }

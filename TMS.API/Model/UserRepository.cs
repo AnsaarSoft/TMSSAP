@@ -1,7 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using TMS.API.Database;
 using TMS.Models.Model;
@@ -15,15 +20,18 @@ namespace TMS.API.Model
         Task<User> AddUser(User pUser);
         Task<User> UpdateUser(User pUser);
         Task<List<User>> GetAllUsers();
+        Task<string> GenerateToken(User user);
     }
     public class UserRepository : IUserRepository
     {
 
         private TMSContext dbContext;
+        private IConfiguration oConfig;
 
-        public UserRepository(TMSContext pContext)
+        public UserRepository(TMSContext pContext, IConfiguration configuration)
         {
             dbContext = pContext;
+            oConfig = configuration;
         }
 
         public async Task<User> ValidateLogin(User pUser)
@@ -35,6 +43,8 @@ namespace TMS.API.Model
                          where a.UserCode == pUser.UserCode
                          && a.Password == pUser.Password
                          select a).FirstOrDefaultAsync();
+                if (rUser == null) return null;
+
             }
             catch (Exception ex)
             {
@@ -95,6 +105,46 @@ namespace TMS.API.Model
                 o.Logger(ex);
             }
             return oCollection;
+        }
+
+        public async Task<string> GenerateToken(User user)
+        {
+            try
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Nbf, new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.Now.AddHours(1)).ToUnixTimeSeconds().ToString())
+                };
+
+                //Role Admin, User
+                if(user.flgSuper)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+                }
+                else
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, "User"));
+                }
+
+                var Token = new JwtSecurityToken(
+                    new JwtHeader(
+                        new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(oConfig.GetValue<string>("MySecretKey"))), SecurityAlgorithms.HmacSha256)),
+                    new JwtPayload(claims)
+                    );
+
+                string TokenString = "";
+                TokenString = new JwtSecurityTokenHandler().WriteToken(Token);
+                return TokenString;
+            }
+            catch (Exception ex)
+            {
+                Logs logger = new Logs();
+                logger.Logger(ex);
+                return "";
+            }
         }
 
     }

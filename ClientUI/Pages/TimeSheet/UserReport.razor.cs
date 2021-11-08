@@ -1,4 +1,5 @@
-﻿using ClientUI.Services;
+﻿using ClientUI.Helpers;
+using ClientUI.Services;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System;
@@ -67,7 +68,7 @@ namespace ClientUI.Pages.TimeSheet
             }
             catch (Exception ex)
             {
-
+                Logs.Logger(ex);
             }
         }
 
@@ -80,7 +81,7 @@ namespace ClientUI.Pages.TimeSheet
             }
             catch (Exception ex)
             {
-
+                Logs.Logger(ex);
             }
         }
 
@@ -93,7 +94,7 @@ namespace ClientUI.Pages.TimeSheet
             }
             catch (Exception ex)
             {
-
+                Logs.Logger(ex);
             }
         }
 
