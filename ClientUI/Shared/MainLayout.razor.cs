@@ -1,6 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using ClientUI.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,11 @@ namespace ClientUI.Shared
 {
     public partial class MainLayout
     {
+
+        #region Variable
+
+        [CascadingParameter]
+        public Task<AuthenticationState> oAuthState { get; set; }
         [Inject]
         NavigationManager oNavigation { get; set; }
         [Inject]
@@ -19,16 +25,23 @@ namespace ClientUI.Shared
         vmUser oUser { get; set; }
         bool flgSideToggle = true;
 
-        protected override async Task<Task> OnAfterRenderAsync(bool firstRender)
+        #endregion
+
+        #region Functions
+
+        protected override async Task OnInitializedAsync()
         {
-            await oService.Initiallize();
-            oUser = oService.oUser;
-            if (oUser == null)
+            var authstate = await oAuthState;
+            if(authstate.User.Identity.IsAuthenticated)
+            {
+                await oService.Initiallize();
+                oUser = oService.oUser;
+            }
+            if(oUser is null)
+            {
                 GotoLogin();
-            return base.OnAfterRenderAsync(firstRender);
+            }
         }
-
-
 
         void DrawToggle()
         {
@@ -45,6 +58,8 @@ namespace ClientUI.Shared
             await oService.Logout();
             oNavigation.NavigateTo("/account/login");
         }
+
+        #endregion
 
 
     }

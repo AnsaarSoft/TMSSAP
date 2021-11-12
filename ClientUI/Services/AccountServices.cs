@@ -8,6 +8,8 @@ using TMS.Models.Model;
 using TMS.Models.ViewModel;
 using Microsoft.Extensions.Configuration;
 using ClientUI.Helpers;
+using Microsoft.AspNetCore.Components.Authorization;
+using ClientUI.Authentication;
 
 namespace ClientUI.Services
 {
@@ -29,14 +31,16 @@ namespace ClientUI.Services
         private ILocalStorageService oStorageService;
         private IRestClient oClient;
         private IConfiguration oConfig;
+        private readonly AuthenticationStateProvider oAuth;
 
-        public AccountServices(ILocalStorageService localStorageService, IRestClient restClient, IConfiguration configuration)
+        public AccountServices(ILocalStorageService localStorageService, IRestClient restClient, IConfiguration configuration, AuthenticationStateProvider authenticationStateProvider)
         {
             oConfig = configuration;
             oStorageService = localStorageService;
             string value = oConfig.GetValue<string>("APIBase");
             oClient = restClient;
             oClient.BaseUrl = new Uri(value);
+            oAuth = authenticationStateProvider;
         }
 
 
@@ -64,6 +68,8 @@ namespace ClientUI.Services
                     oUser.User = Response.UserInfo;
                     oUser.JWTKey = Response.JWTKey;
                     await oStorageService.SetItemAsync("user", oUser);
+                    ((AuthStateProvider)oAuth).NotifyUserAuthentication(oUser.JWTKey);
+
                     return true;
                 }
                 else
@@ -83,6 +89,7 @@ namespace ClientUI.Services
             try
             {
                 await oStorageService.RemoveItemAsync("user");
+                ((AuthStateProvider)oAuth).NotifyUserLogout();
                 return true;
             }
             catch (Exception ex)

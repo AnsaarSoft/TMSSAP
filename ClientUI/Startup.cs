@@ -15,6 +15,8 @@ using Blazored.LocalStorage;
 using RestSharp;
 using MudBlazor;
 using System.Text;
+using Microsoft.AspNetCore.Components.Authorization;
+using ClientUI.Authentication;
 
 namespace ClientUI
 {
@@ -54,7 +56,8 @@ namespace ClientUI
             services.AddScoped<IAccountServices, AccountServices>();
             services.AddScoped<ITimeSheetServices, TimeSheetServices>();
 
-            
+            services.AddAuthorizationCore();
+            services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
 
         }
 

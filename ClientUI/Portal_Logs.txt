@@ -1,0 +1,18 @@
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 09/11/2021 07:45 pm 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 09/11/2021 08:06 pm 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 10/11/2021 11:49 pm 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 10/11/2021 11:49 pm 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 10/11/2021 11:50 pm 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 10/11/2021 11:50 pm 
+Detail: No Detail
