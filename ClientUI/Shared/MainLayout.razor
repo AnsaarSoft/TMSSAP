@@ -4,24 +4,28 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 
-<MudLayout>
+@if (oUser is not null)
+{
+    <MudLayout>
 
-    <MudAppBar Color="Color.Primary" Fixed="true" Elevation="1">
+        <MudAppBar Color="Color.Primary" Fixed="true" Elevation="1">
 
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e)=> DrawToggle())"></MudIconButton>
-        <MudText Typo="Typo.h5" Class="ml-3">Time Sheet</MudText>
-        <MudText>Welcome </MudText>
-        <MudSpacer />
-        <MudText Typo="Typo.h6" Class="ml-3">LogOut</MudText>
-        <MudIconButton Icon="@Icons.Material.Rounded.AllOut" Color="Color.Inherit" Edge="Edge.End" OnClick="LogOut" />
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e)=> DrawToggle())"></MudIconButton>
+            <MudText Typo="Typo.h5" Class="ml-3">Time Sheet</MudText>
+            <MudSpacer />
+            <MudText Typo="Typo.h6">Welcome @oUser.User.UserName</MudText>
+            <MudText Typo="Typo.h6" Class="ml-3">LogOut</MudText>
+            <MudIconButton Icon="@Icons.Material.Rounded.AllOut" Color="Color.Inherit" Edge="Edge.End" OnClick="LogOut" />
 
-    </MudAppBar>
-    <MudDrawer @bind-Open="@flgSideToggle" Elevation="2" ClipMode="DrawerClipMode.Docked">
-        <NavMenu />
-    </MudDrawer>
-    <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.Medium">
-            @Body
-        </MudContainer>
-    </MudMainContent>
-</MudLayout>
+        </MudAppBar>
+        <MudDrawer @bind-Open="@flgSideToggle" Elevation="2" ClipMode="DrawerClipMode.Docked">
+            <NavMenu />
+        </MudDrawer>
+        <MudMainContent>
+            <MudContainer MaxWidth="MaxWidth.Medium">
+                @Body
+            </MudContainer>
+        </MudMainContent>
+    </MudLayout>
+
+}
