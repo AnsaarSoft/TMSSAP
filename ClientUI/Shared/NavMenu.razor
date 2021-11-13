@@ -1,5 +1,5 @@
-﻿
-<MudNavMenu >
+﻿@inject IAccountServices oAcctService
+<MudNavMenu>
     @*<div class="NavHead">
             <img src="../image/tms.jpg" alt="Icon">
             <p>TimeSheet</p>
@@ -9,12 +9,37 @@
     <MudDivider Class="my-2" />
     @*<MudNavLink Href="/dashboard" Icon="@Icons.Filled.Dashboard">Dashboard</MudNavLink>*@
     <MudNavLink Href="/timesheet/dailytimesheet" Icon="@Icons.Filled.Receipt">Daily Time</MudNavLink>
+    @if(flgAdmin)
+    {
     <MudNavLink Href="/account/userlist" Icon="@Icons.Filled.Receipt">User List</MudNavLink>
     <MudNavGroup Title="Reports" Expanded="false" Icon="@Icons.Filled.Settings">
         <MudNavLink Href="/timesheet/userreport" Icon="@Icons.Filled.Receipt">User TimeSheet</MudNavLink>
     </MudNavGroup>
+    }
+
 </MudNavMenu>
 
+@code
+{
+    bool flgAdmin = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await oAcctService.Initiallize();
+        if (oAcctService.oUser is not null)
+        {
+            if (oAcctService.oUser.User.flgSuper)
+            {
+                flgAdmin = true;
+            }
+            else
+            {
+                flgAdmin = false;
+            }
+        }
+
+    }
+}
 
 
 @*<div class="top-row pl-4 navbar navbar-dark">
