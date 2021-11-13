@@ -14,7 +14,7 @@ namespace TMS.Models.Model
         public string SBOId { get; set; }
         public double LeaveHours { get; set; }
         public bool flgSuper { get; set; }
-
+        public bool flgBreak { get; set; }
 
 
     }

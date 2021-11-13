@@ -14,6 +14,7 @@ namespace TMS.Models.Model
         public string SBOId { get; set; }
         public string LeaveHours { get; set; }
         public string flgSuper { get; set; }
+        public string flgBreak { get; set; }
 
         public User Mapping(mUser ouser)
         {
@@ -36,6 +37,8 @@ namespace TMS.Models.Model
                     oNew.LeaveHours = Convert.ToInt32(ouser.LeaveHours);
                 if (!string.IsNullOrEmpty(ouser.flgSuper))
                     oNew.flgSuper = Convert.ToBoolean(ouser.flgSuper);
+                if (!string.IsNullOrEmpty(ouser.flgBreak))
+                    oNew.flgSuper = Convert.ToBoolean(ouser.flgBreak);
 
             }
             catch (Exception ex)
