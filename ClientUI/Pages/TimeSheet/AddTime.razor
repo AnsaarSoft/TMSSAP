@@ -34,17 +34,20 @@
                     <MudTimePicker Label="End Time" @bind-Time="LeaveEndTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgLeave" />
                 </MudItem>
             </MudGrid>
-            <MudGrid>
-                <MudItem xs="12" sm="6" md="4">
-                    <MudSwitch @bind-Checked="flgBreak" Color="Color.Primary">Break Toggle</MudSwitch>
-                </MudItem>
-                <MudItem xs="12" sm="6" md="4">
-                    <MudTimePicker Label="Start Time" @bind-Time="BreakStartTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgBreak" />
-                </MudItem>
-                <MudItem xs="12" sm="6" md="4">
-                    <MudTimePicker Label="End Time" @bind-Time="BreakEndTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgBreak" />
-                </MudItem>
-            </MudGrid>
+            @if (ShowBreak)
+            {
+                <MudGrid >
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudSwitch @bind-Checked="flgBreak" Color="Color.Primary" >Break Toggle</MudSwitch>
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudTimePicker Label="Start Time" @bind-Time="BreakStartTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgBreak" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudTimePicker Label="End Time" @bind-Time="BreakEndTime" AmPm="true" TimeFormat="hh:mm tt" Disabled="!flgBreak" />
+                    </MudItem>
+                </MudGrid>
+            }
             <MudGrid>
                 <MudItem>
                     <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddTimeRecord" Disabled="flgBusy">Add Time</MudButton>

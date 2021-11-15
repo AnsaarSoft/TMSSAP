@@ -12,9 +12,11 @@ namespace TMS.Models.Model
         public string Password { get; set; }
         public string Email { get; set; }
         public string SBOId { get; set; }
+        public string Manager { get; set; }
         public string LeaveHours { get; set; }
         public string flgSuper { get; set; }
         public string flgBreak { get; set; }
+        public string flgAprover { get; set; }
 
         public User Mapping(mUser ouser)
         {
@@ -33,12 +35,16 @@ namespace TMS.Models.Model
                     oNew.Email = Convert.ToString(ouser.Email);
                 if(!string.IsNullOrEmpty(ouser.SBOId))
                     oNew.SBOId = Convert.ToString(ouser.SBOId);
+                if (!string.IsNullOrEmpty(ouser.Manager))
+                    oNew.Manager = Convert.ToString(ouser.Manager);
                 if (!string.IsNullOrEmpty(ouser.LeaveHours))
                     oNew.LeaveHours = Convert.ToInt32(ouser.LeaveHours);
                 if (!string.IsNullOrEmpty(ouser.flgSuper))
                     oNew.flgSuper = Convert.ToBoolean(ouser.flgSuper);
                 if (!string.IsNullOrEmpty(ouser.flgBreak))
                     oNew.flgSuper = Convert.ToBoolean(ouser.flgBreak);
+                if (!string.IsNullOrEmpty(ouser.flgAprover))
+                    oNew.flgAprover = Convert.ToBoolean(ouser.flgAprover);
 
             }
             catch (Exception ex)

@@ -38,7 +38,19 @@
                 </MudGrid>
                 <MudGrid>
                     <MudItem xs="12" sm="6" md="4">
+                        <MudAutocomplete T="string" Label="Manager" @bind-Value="oModel.Manager" SearchFunc="SearchAprovar"
+                                         ResetValueOnEmptyText="true" />
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="12" sm="6" md="4">
                         <MudSwitch @bind-Checked="oModel.flgSuper" Label="Super User" Color="Color.Primary" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudSwitch @bind-Checked="oModel.flgBreak" Label="Allow Break" Color="Color.Secondary" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudSwitch @bind-Checked="oModel.flgAprover" Label="Approver" Color="Color.Secondary" />
                     </MudItem>
                 </MudGrid>
                 <MudGrid>
@@ -58,6 +70,7 @@
                                 <MudTh>UserName</MudTh>
                                 <MudTh>Email</MudTh>
                                 <MudTh>Admin User</MudTh>
+                                <MudTh>Break Toggle</MudTh>
                             </HeaderContent>
                             <RowTemplate>
                                 <MudTd DataLabel="User Code">@context.UserCode </MudTd>
@@ -65,11 +78,25 @@
                                 <MudTd DataLabel="Email">@context.Email</MudTd>
                                 <MudTd DataLabel="Admin User">
                                     @if (context.flgSuper)
-                                    {<MudChip Color="Color.Success">Active</MudChip>}
+                                    {
+                                        <MudChip Color="Color.Success">Active</MudChip>
+                                    }
                                     else
-                                    { <MudChip Color="Color.Default">InActive</MudChip>}
-                            </MudTd>
-                        </RowTemplate>
+                                    { 
+                                        <MudChip Color="Color.Default">InActive</MudChip>
+                                    }
+                                </MudTd>
+                                <MudTd DataLabel="Break Toggle">
+                                    @if (context.flgBreak)
+                                    {
+                                        <MudChip Color="Color.Success">Active</MudChip>
+                                    }
+                                    else
+                                    { 
+                                        <MudChip Color="Color.Default">InActive</MudChip>
+                                    }
+                                </MudTd>
+                            </RowTemplate>
 
                     </MudTable>
                 </MudItem>

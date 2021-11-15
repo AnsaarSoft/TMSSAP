@@ -18,6 +18,7 @@ namespace TMS.API.Model
         Task SubmitTimeSheet(vmTimeSheet oSheet);
         Task CancelTimeSheet(vmTimeSheet oSheet);
         Task<List<vmReportSheet>> GetUserReport(DateTime prmFrom, DateTime prmTo, int prmUser, string prmUserName);
+        Task<List<vmApprovals>> GetAllApprovals(int prmUserId);
     }
 
     public class TimeSheetRepository : ITimeSheetRepository
@@ -49,7 +50,7 @@ namespace TMS.API.Model
 
         public async Task<TimeSheet> AddTimeSheet(vmAddTime pTime)
         {
-            
+
             try
             {
                 TimeSheet oNew = pTime.oTime.Mapping();
@@ -77,12 +78,12 @@ namespace TMS.API.Model
             {
                 LeaveTime oNew = pTime.oLeave.Mapping();
                 var CheckLeave = await (from a in dbContext.LeaveTimes
-                                       where a.rUser == oNew.rUser
-                                       && a.rTimeSheet == oNew.rTimeSheet
-                                       select a).FirstOrDefaultAsync();
+                                        where a.rUser == oNew.rUser
+                                        && a.rTimeSheet == oNew.rTimeSheet
+                                        select a).FirstOrDefaultAsync();
                 if (CheckLeave != null)
                     return null;
-                
+
                 await dbContext.LeaveTimes.AddAsync(oNew);
                 await dbContext.SaveChangesAsync();
                 return oNew;
@@ -92,7 +93,7 @@ namespace TMS.API.Model
                 return null;
             }
         }
-        
+
         public async Task<BreakTime> AddBreak(vmAddTime pTime)
         {
 
@@ -121,34 +122,55 @@ namespace TMS.API.Model
             {
                 if (oSheet.oSelected == null)
                     return;
-                foreach(var One in oSheet.oSelected)
+                foreach (var One in oSheet.oSelected)
                 {
                     var oRecord = await (from a in dbContext.TimeSheets
-                                   where a.ID == One.ID
-                                   select a).FirstOrDefaultAsync();
+                                         where a.ID == One.ID
+                                         select a).FirstOrDefaultAsync();
                     if (oRecord == null) continue;
                     if (oRecord.Status == "Draft")
                     {
-                        oRecord.Status = "Posted";
-                        if(oRecord.flgLeave)
+                        //if(oRecord.flgLeave)
+                        //{
+                        //    var oLeave = await (from a in dbContext.LeaveTimes
+                        //                        where a.rTimeSheet == oRecord.ID
+                        //                        && a.rUser == oRecord.rUser
+                        //                        select a).FirstOrDefaultAsync();
+                        //    if (oLeave != null)
+                        //    {
+                        //        var oUser = await (from a in dbContext.Users
+                        //                           where a.ID == oRecord.rUser
+                        //                           select a).FirstOrDefaultAsync();
+                        //        if (oUser != null)
+                        //        {
+                        //            TimeSpan Hours = oLeave.EndTime - oLeave.StartTime;
+                        //            oUser.LeaveHours -= Hours.TotalHours;
+                        //            dbContext.Entry<User>(oUser).State = EntityState.Modified;
+                        //        }
+                        //    }
+
+                        //}
+                        //oRecord.Status = "Posted";
+                        if (oRecord.flgLeave)
                         {
-                            var oLeave = await (from a in dbContext.LeaveTimes
-                                                where a.rTimeSheet == oRecord.ID
-                                                && a.rUser == oRecord.rUser
-                                                select a).FirstOrDefaultAsync();
-                            if (oLeave != null)
-                            {
-                                var oUser = await (from a in dbContext.Users
-                                                   where a.ID == oRecord.rUser
-                                                   select a).FirstOrDefaultAsync();
-                                if (oUser != null)
-                                {
-                                    TimeSpan Hours = oLeave.EndTime - oLeave.StartTime;
-                                    oUser.LeaveHours -= Hours.TotalHours;
-                                    dbContext.Entry<User>(oUser).State = EntityState.Modified;
-                                }
-                            }
-                 
+                            var normalUser = await (from a in dbContext.Users
+                                                      where a.ID == One.rUser
+                                                      select a).FirstOrDefaultAsync();
+                            var approvalUser = await (from a in dbContext.Users
+                                                      where a.UserName.Contains(normalUser.UserName, StringComparison.InvariantCultureIgnoreCase)
+                                                      select a).FirstOrDefaultAsync();
+                            UserApproval doc = new();
+                            doc.rUser = approvalUser.ID;
+                            doc.rDocument = One.ID;
+                            doc.Status = "Pending";
+                            doc.Remarks = "";
+                            doc.UserCode = normalUser.UserName;
+                            await dbContext.UserApprovals.AddAsync(doc);
+                            oRecord.Status = "Draft-Approval";
+                        }
+                        else
+                        {
+                            oRecord.Status = "Posted";
                         }
                     }
                     dbContext.Entry<TimeSheet>(oRecord).State = EntityState.Modified;
@@ -157,6 +179,8 @@ namespace TMS.API.Model
             }
             catch (Exception ex)
             {
+                Logs logs = new();
+                logs.Logger(ex);
             }
         }
 
@@ -190,11 +214,11 @@ namespace TMS.API.Model
             {
                 oCollection = new List<vmReportSheet>();
                 var oTimeCollection = await (from a in dbContext.TimeSheets
-                                       where a.rUser == prmUser
-                                       && a.DayDate.Date >= prmFrom.Date
-                                       && a.DayDate.Date <= prmTo.Date
-                                       select a).ToListAsync();
-                foreach(var Line in oTimeCollection)
+                                             where a.rUser == prmUser
+                                             && a.DayDate.Date >= prmFrom.Date
+                                             && a.DayDate.Date <= prmTo.Date
+                                             select a).ToListAsync();
+                foreach (var Line in oTimeCollection)
                 {
                     vmReportSheet oRecord = new vmReportSheet();
                     oRecord.ID = Line.ID;
@@ -214,7 +238,7 @@ namespace TMS.API.Model
                                             where a.rTimeSheet == Line.ID
                                             select a).ToListAsync();
 
-                    foreach(var LeaveLine in oLeaveList)
+                    foreach (var LeaveLine in oLeaveList)
                     {
                         vmLeaves oLeave = new vmLeaves();
                         oLeave.StartTime = LeaveLine.StartTime.ToString("hh:mm tt");
@@ -245,6 +269,40 @@ namespace TMS.API.Model
                 oCollection = null;
             }
             return oCollection;
+        }
+
+        public async Task<List<vmApprovals>> GetAllApprovals(int prmUserId)
+        {
+            List<vmApprovals> approvalList = new();
+            try
+            {
+                var simpleList = await (from a in dbContext.UserApprovals
+                                        join b in dbContext.TimeSheets on a.rDocument equals b.ID
+                                        join c in dbContext.Users on a.rUser equals c.ID
+                                        join d in dbContext.LeaveTimes on b.ID equals d.rTimeSheet
+                                        where a.rUser == prmUserId
+                                        && a.Status == "Pending"
+                                        select new { ID = a.ID, Username = c.UserName, LeaveDate = b.DayDate.ToString("dd/MM/yyyy"), LeaveStart = d.StartTime.ToString("hh:mm tt"), LeaveEnd = d.EndTime.ToString("hh:mm tt"), d.StartTime, d.EndTime }).ToListAsync();
+                foreach (var One in simpleList)
+                {
+                    vmApprovals doc = new();
+                    doc.Username = One.Username;
+                    doc.LeaveDate = One.LeaveDate;
+                    doc.LeaveStart = One.LeaveStart;
+                    doc.LeaveEnd = One.LeaveEnd;
+                    doc.Status = "Pending";
+                    doc.TotalHour = (One.EndTime - One.StartTime).TotalHours;
+                    doc.ID = One.ID;
+                    approvalList.Add(doc);
+                }
+                return approvalList;
+            }
+            catch (Exception ex)
+            {
+                Logs logs = new();
+                logs.Logger(ex);
+                return approvalList;
+            }
         }
 
     }

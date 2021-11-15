@@ -26,6 +26,7 @@ namespace ClientUI.Pages.TimeSheet
         TimeSpan? BreakEndTime = new TimeSpan(16, 0, 0);
         bool flgLeave = false;
         bool flgBreak = false;
+        bool ShowBreak = false;
 
         vmAddTime oModel = new vmAddTime();
 
@@ -45,6 +46,17 @@ namespace ClientUI.Pages.TimeSheet
         #endregion
 
         #region Function
+
+        protected override async Task<bool> OnInitializedAsync()
+        {
+            await oService.Initiallize();
+            if (oService.oUser is not null)
+            {
+                ShowBreak = oService.oUser.User.flgBreak;
+            }
+            //return base.OnInitializedAsync();
+            return true;
+        }
 
         public async Task AddTimeRecord()
         {

@@ -125,5 +125,37 @@ namespace TMS.API.Controllers
             }
         }
 
+        [HttpPost, Route("sendapproval")]
+        public async Task<IActionResult> SendApproval([FromBody] vmTimeSheet oSheet)
+        {
+            try
+            {
+                await oTimeSheetRepository.SubmitTimeSheet(oSheet);
+                oSheet.flgSuccess = true;
+                return Ok(oSheet);
+            }
+            catch (Exception ex)
+            {
+                Logs olog = new();
+                olog.Logger(ex);
+                return BadRequest("Internal server error.");
+            }
+        }
+
+        [HttpGet, Route("getallapproval")]
+        public async Task<IActionResult> GetAllApprovals(int prmUser)
+        {
+            try
+            {
+                List<vmApprovals> approvalList = await oTimeSheetRepository.GetAllApprovals(prmUser);
+                return Ok(approvalList);
+            }
+            catch (Exception ex)
+            {
+                Logs logs = new();
+                logs.Logger(ex);
+                return BadRequest("Internal server error.");
+            }
+        }
     }
 }

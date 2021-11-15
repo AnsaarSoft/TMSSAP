@@ -1,6 +1,0 @@
-Exception Message: IDX10653: The encryption algorithm 'System.String' requires a key size of at least 'System.Int32' bits. Key 'Microsoft.IdentityModel.Tokens.SymmetricSecurityKey', is of size: 'System.Int32'. (Parameter 'key') 
-Date: 07/11/2021 11:05 am 
-Detail: No Detail
-Exception Message: IDX10653: The encryption algorithm 'System.String' requires a key size of at least 'System.Int32' bits. Key 'Microsoft.IdentityModel.Tokens.SymmetricSecurityKey', is of size: 'System.Int32'. (Parameter 'key') 
-Date: 07/11/2021 11:07 am 
-Detail: No Detail

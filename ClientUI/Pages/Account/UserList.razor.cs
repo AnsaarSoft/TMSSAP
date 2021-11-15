@@ -18,7 +18,8 @@ namespace ClientUI.Pages.Account
         bool flgBusy = false;
         User oModel = new User();
         List<User> oCollection = new List<User>();
-
+        List<string> oAprovarList = new();
+        string SelectedAprovar;
         bool isShow;
         InputType PasswordInput = InputType.Password;
         string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
@@ -102,11 +103,12 @@ namespace ClientUI.Pages.Account
             }
         }
 
-        public async Task GetAllUser()
+        public async Task FormInitiallize()
         {
             try
             {
                 oCollection = await oService.GetAllUser();
+                oAprovarList = await oService.GetAllAprovars();
             }
             catch (Exception ex)
             {
@@ -117,13 +119,31 @@ namespace ClientUI.Pages.Account
 
         protected override async Task OnInitializedAsync()
         {
-            await GetAllUser();
+            await FormInitiallize();
             //return base.OnInitializedAsync();
         }
 
         private void SelectedRow(TableRowClickEventArgs<User> tableRowClickEventArgs)
         {
             oModel = tableRowClickEventArgs.Item;
+        }
+
+        public async Task<IEnumerable<string>> SearchAprovar(string selected)
+        {
+            try
+            {
+                await Task.Delay(5);
+                if (string.IsNullOrEmpty(selected))
+                    return oAprovarList;
+                return oAprovarList.Where(a => a.Contains(selected, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage("Something went wrong.");
+                Logs.Logger(ex);
+                return oAprovarList;
+            }
+
         }
 
         #endregion

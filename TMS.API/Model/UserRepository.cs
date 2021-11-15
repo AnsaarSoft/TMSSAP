@@ -20,6 +20,7 @@ namespace TMS.API.Model
         Task<User> AddUser(User pUser);
         Task<User> UpdateUser(User pUser);
         Task<List<User>> GetAllUsers();
+        Task<List<User>> GetAllAprovar();
         Task<string> GenerateToken(User user);
     }
     public class UserRepository : IUserRepository
@@ -97,6 +98,24 @@ namespace TMS.API.Model
             {
                 oCollection = await (from a in dbContext.Users
                                select a).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                oCollection = null;
+                Logs o = new Logs();
+                o.Logger(ex);
+            }
+            return oCollection;
+        }
+
+        public async Task<List<User>> GetAllAprovar()
+        {
+            List<User> oCollection = new List<User>();
+            try
+            {
+                oCollection = await (from a in dbContext.Users
+                                     where a.flgAprover == true
+                                     select a).ToListAsync();
             }
             catch (Exception ex)
             {

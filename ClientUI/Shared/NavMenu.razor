@@ -9,12 +9,13 @@
     <MudDivider Class="my-2" />
     @*<MudNavLink Href="/dashboard" Icon="@Icons.Filled.Dashboard">Dashboard</MudNavLink>*@
     <MudNavLink Href="/timesheet/dailytimesheet" Icon="@Icons.Filled.Receipt">Daily Time</MudNavLink>
-    @if(flgAdmin)
+    @if (flgAdmin)
     {
-    <MudNavLink Href="/account/userlist" Icon="@Icons.Filled.Receipt">User List</MudNavLink>
-    <MudNavGroup Title="Reports" Expanded="false" Icon="@Icons.Filled.Settings">
-        <MudNavLink Href="/timesheet/userreport" Icon="@Icons.Filled.Receipt">User TimeSheet</MudNavLink>
-    </MudNavGroup>
+        <MudNavLink Href="/account/userlist" Icon="@Icons.Filled.Receipt">User List</MudNavLink>
+        <MudNavLink Href="/timesheet/userapproval" Icon="@Icons.Filled.Receipt">Approval Decision</MudNavLink>
+        <MudNavGroup Title="Reports" Expanded="false" Icon="@Icons.Filled.Settings">
+            <MudNavLink Href="/timesheet/userreport" Icon="@Icons.Filled.Receipt">User TimeSheet</MudNavLink>
+        </MudNavGroup>
     }
 
 </MudNavMenu>

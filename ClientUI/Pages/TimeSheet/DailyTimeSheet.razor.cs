@@ -40,10 +40,18 @@ namespace ClientUI.Pages.TimeSheet
 
         #region Function
 
-        protected override void OnInitialized()
+        //protected override void OnInitialized()
+        //{
+        //    base.OnInitialized();
+        //    WeekStart();
+        //}
+
+        protected async override Task OnInitializedAsync()
         {
-            base.OnInitialized();
-            WeekStart();
+            await Task.Run(() => {
+                WeekStart();
+            });
+            //return base.OnInitializedAsync();
         }
 
         public async Task GetData()
@@ -60,7 +68,7 @@ namespace ClientUI.Pages.TimeSheet
                 }
                 else
                 {
-                    ErrorMessage("Data didn't loaded");
+                    ErrorMessage("No record found on selected range.");
                 }
             }
             catch (Exception ex)
@@ -101,8 +109,8 @@ namespace ClientUI.Pages.TimeSheet
             flgBusy = true;
             try
             {
-                await oService.SubmitTimeSheet(oModel);
-                await GetData();
+                oModel = await oService.SubmitTimeSheet(oModel);
+                //await GetData();
             }
             catch (Exception ex)
             {

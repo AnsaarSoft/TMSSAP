@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TMS.API.Database;
 
 namespace TMS.API.Migrations
 {
     [DbContext(typeof(TMSContext))]
-    partial class TMSContextModelSnapshot : ModelSnapshot
+    [Migration("20211113123043_breakcolumn")]
+    partial class breakcolumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,9 +115,6 @@ namespace TMS.API.Migrations
                     b.Property<double>("LeaveHours")
                         .HasColumnType("float");
 
-                    b.Property<string>("Manager")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
@@ -127,9 +126,6 @@ namespace TMS.API.Migrations
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("flgAprover")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("flgBreak")
                         .HasColumnType("bit");
@@ -151,37 +147,9 @@ namespace TMS.API.Migrations
                             SBOId = "",
                             UserCode = "admin",
                             UserName = "admin",
-                            flgAprover = false,
                             flgBreak = false,
                             flgSuper = false
                         });
-                });
-
-            modelBuilder.Entity("TMS.Models.Model.UserApproval", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Remarks")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("rDocument")
-                        .HasColumnType("int");
-
-                    b.Property<int>("rUser")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("UserApprovals");
                 });
 #pragma warning restore 612, 618
         }

@@ -23,6 +23,7 @@ namespace ClientUI.Services
         Task<User> AddUser(User pUser);
         Task<User> UpdateUser(User pUser);
         Task<List<User>> GetAllUser();
+        Task<List<string>> GetAllAprovars();
     }
 
     public class AccountServices : IAccountServices
@@ -146,6 +147,26 @@ namespace ClientUI.Services
             {
                 var Request = new RestRequest("/account/getall");
                 oList = await oClient.GetAsync<List<User>>(Request);
+            }
+            catch (Exception ex)
+            {
+                Logs.Logger(ex);
+            }
+            return oList;
+        }
+
+        public async Task<List<string>> GetAllAprovars()
+        {
+            List<string> oList = new();
+            try
+            {
+                var Request = new RestRequest("/account/getallaprovar");
+                var userList = await oClient.GetAsync<List<User>>(Request);
+                foreach(var user in userList)
+                {
+                    string username = user.UserName;
+                    oList.Add(username);
+                }
             }
             catch (Exception ex)
             {

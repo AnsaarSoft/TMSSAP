@@ -12,9 +12,11 @@ namespace TMS.Models.Model
         public string Password { get; set; }
         public string Email { get; set; }
         public string SBOId { get; set; }
+        public string Manager { get; set; }
         public double LeaveHours { get; set; }
         public bool flgSuper { get; set; }
         public bool flgBreak { get; set; }
+        public bool flgAprover { get; set; }
 
 
     }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TMS.API.Database;
 
 namespace TMS.API.Migrations
 {
     [DbContext(typeof(TMSContext))]
-    partial class TMSContextModelSnapshot : ModelSnapshot
+    [Migration("20211114021754_approvals")]
+    partial class approvals
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,15 +175,34 @@ namespace TMS.API.Migrations
                     b.Property<string>("UserCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("rDocument")
+                    b.Property<int?>("oDocumentID")
                         .HasColumnType("int");
 
-                    b.Property<int>("rUser")
+                    b.Property<int?>("oUserID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
+                    b.HasIndex("oDocumentID");
+
+                    b.HasIndex("oUserID");
+
                     b.ToTable("UserApprovals");
+                });
+
+            modelBuilder.Entity("TMS.Models.Model.UserApproval", b =>
+                {
+                    b.HasOne("TMS.Models.Model.TimeSheet", "oDocument")
+                        .WithMany()
+                        .HasForeignKey("oDocumentID");
+
+                    b.HasOne("TMS.Models.Model.User", "oUser")
+                        .WithMany()
+                        .HasForeignKey("oUserID");
+
+                    b.Navigation("oDocument");
+
+                    b.Navigation("oUser");
                 });
 #pragma warning restore 612, 618
         }

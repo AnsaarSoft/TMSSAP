@@ -28,5 +28,6 @@ namespace TMS.API.Database
         public DbSet<TimeSheet> TimeSheets { get; set; }
         public DbSet<BreakTime> BreakTimes { get; set; }
         public DbSet<LeaveTime> LeaveTimes { get; set; }
+        public DbSet<UserApproval> UserApprovals { get; set; }
     }
 }

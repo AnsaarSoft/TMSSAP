@@ -111,5 +111,28 @@ namespace TMS.API.Controllers
             }
         }
 
+        [HttpGet, Route("getallaprovar")]
+        public async Task<IActionResult> GetAllAprovar()
+        {
+            try
+            {
+                var oCollection = await oUserRepository.GetAllAprovar();
+                if (oCollection != null)
+                {
+                    return Ok(oCollection);
+                }
+                else
+                {
+                    return BadRequest("Invalid user or password.");
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                return BadRequest($"Internal server error. {ex.Message} ");
+            }
+        }
+
     }
 }
+

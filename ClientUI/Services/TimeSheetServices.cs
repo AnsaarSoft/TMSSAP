@@ -20,6 +20,7 @@ namespace ClientUI.Services
         Task<vmTimeSheet> SubmitTimeSheet(vmTimeSheet oSheet);
         Task<vmTimeSheet> CancelTimeSheet(vmTimeSheet oSheet);
         Task<List<vmReportSheet>> GetUserReport(string prmFrom, string prmTo, int prmUserId, string prmUserName);
+        Task<List<vmApprovals>> GetAllPendingDocument();
     }
     public class TimeSheetServices : ITimeSheetServices
     {
@@ -115,6 +116,37 @@ namespace ClientUI.Services
             }
         }
 
+        public async Task<vmTimeSheet> SendToApproval(vmTimeSheet oSheet)
+        {
+            try
+            {
+                await Initiallize();
+                if (oUser != null)
+                {
+                    oSheet.oUser = oUser.User;
+                }
+                else
+                {
+                    return null;
+                }
+                var Request = new RestRequest("/timesheet/submitsheet").AddJsonBody(oSheet);
+                var Response = await oClient.PostAsync<vmTimeSheet>(Request);
+                if (Response.flgSuccess)
+                {
+                    return Response;
+                }
+                else
+                {
+                    return Response;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.Logger(ex);
+                return null;
+            }
+        }
+
         public async Task<vmTimeSheet> SubmitTimeSheet(vmTimeSheet oSheet)
         {
             try
@@ -128,6 +160,7 @@ namespace ClientUI.Services
                 {
                     return null;
                 }
+                
                 var Request = new RestRequest("/timesheet/submitsheet").AddJsonBody(oSheet);
                 var Response = await oClient.PostAsync<vmTimeSheet>(Request);
                 if (Response.flgSuccess)
@@ -201,6 +234,28 @@ namespace ClientUI.Services
                 Logs.Logger(ex);
                 return null;
             }
+        }
+
+        public async Task<List<vmApprovals>> GetAllPendingDocument()
+        {
+            List<vmApprovals> approvalList = new();
+            try
+            {
+                await Initiallize();
+                if (oUser is null)
+                {
+                    return null;
+                }
+                var Request = new RestRequest("/timesheet/getallapproval")
+                    .AddParameter("prmUser", oUser.User.ID);
+                approvalList = await oClient.GetAsync<List<vmApprovals>>(Request);
+                //if(approvalList.Count > 0)
+            }
+            catch (Exception ex)
+            {
+                Logs.Logger(ex);
+            }
+            return approvalList;
         }
 
     }
