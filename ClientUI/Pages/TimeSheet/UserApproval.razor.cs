@@ -38,12 +38,13 @@ namespace ClientUI.Pages.TimeSheet
             //return base.OnInitializedAsync();
         }
 
-        private async Task ApproveRecords()
+        private async Task ApproveRecords(int id)
         {
             flgBusy = true;
             try
             {
-
+                //oCollection.Remove();
+                SuccessMessage($"document approved: {id}");
             }
             catch (Exception ex)
             {
@@ -52,12 +53,12 @@ namespace ClientUI.Pages.TimeSheet
             flgBusy = false;
         }
 
-        private async Task RejectRecords()
+        private async Task RejectRecords(int id)
         {
             flgBusy = true;
             try
             {
-
+                SuccessMessage($"document rejected: {id}");
             }
             catch (Exception ex)
             {

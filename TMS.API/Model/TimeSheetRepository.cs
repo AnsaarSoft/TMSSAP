@@ -15,8 +15,8 @@ namespace TMS.API.Model
         Task<TimeSheet> AddTimeSheet(vmAddTime pTime);
         Task<LeaveTime> AddLeave(vmAddTime pTime);
         Task<BreakTime> AddBreak(vmAddTime pTime);
-        Task SubmitTimeSheet(vmTimeSheet oSheet);
-        Task CancelTimeSheet(vmTimeSheet oSheet);
+        Task<vmTimeSheet> SubmitTimeSheet(vmTimeSheet oSheet);
+        Task<vmTimeSheet> CancelTimeSheet(vmTimeSheet oSheet);
         Task<List<vmReportSheet>> GetUserReport(DateTime prmFrom, DateTime prmTo, int prmUser, string prmUserName);
         Task<List<vmApprovals>> GetAllApprovals(int prmUserId);
     }
@@ -116,12 +116,10 @@ namespace TMS.API.Model
             }
         }
 
-        public async Task SubmitTimeSheet(vmTimeSheet oSheet)
+        public async Task<vmTimeSheet> SubmitTimeSheet(vmTimeSheet oSheet)
         {
             try
             {
-                if (oSheet.oSelected == null)
-                    return;
                 foreach (var One in oSheet.oSelected)
                 {
                     var oRecord = await (from a in dbContext.TimeSheets
@@ -157,7 +155,8 @@ namespace TMS.API.Model
                                                       where a.ID == One.rUser
                                                       select a).FirstOrDefaultAsync();
                             var approvalUser = await (from a in dbContext.Users
-                                                      where a.UserName.Contains(normalUser.UserName, StringComparison.InvariantCultureIgnoreCase)
+                                                          //where a.UserName.Contains(normalUser.UserName, StringComparison.InvariantCultureIgnoreCase)
+                                                      where a.UserName == normalUser.Manager
                                                       select a).FirstOrDefaultAsync();
                             UserApproval doc = new();
                             doc.rUser = approvalUser.ID;
@@ -166,7 +165,7 @@ namespace TMS.API.Model
                             doc.Remarks = "";
                             doc.UserCode = normalUser.UserName;
                             await dbContext.UserApprovals.AddAsync(doc);
-                            oRecord.Status = "Draft-Approval";
+                            oRecord.Status = "Draft-Pending";
                         }
                         else
                         {
@@ -182,14 +181,15 @@ namespace TMS.API.Model
                 Logs logs = new();
                 logs.Logger(ex);
             }
+            return oSheet;
         }
 
-        public async Task CancelTimeSheet(vmTimeSheet oSheet)
+        public async Task<vmTimeSheet> CancelTimeSheet(vmTimeSheet oSheet)
         {
             try
             {
                 if (oSheet.oSelected == null)
-                    return;
+                    return oSheet;
                 foreach (var One in oSheet.oSelected)
                 {
                     var oRecord = await (from a in dbContext.TimeSheets
@@ -204,7 +204,10 @@ namespace TMS.API.Model
             }
             catch (Exception ex)
             {
+                Logs logs = new();
+                logs.Logger(ex);
             }
+            return oSheet;
         }
 
         public async Task<List<vmReportSheet>> GetUserReport(DateTime prmFrom, DateTime prmTo, int prmUser, string prmUserName)
@@ -282,7 +285,7 @@ namespace TMS.API.Model
                                         join d in dbContext.LeaveTimes on b.ID equals d.rTimeSheet
                                         where a.rUser == prmUserId
                                         && a.Status == "Pending"
-                                        select new { ID = a.ID, Username = c.UserName, LeaveDate = b.DayDate.ToString("dd/MM/yyyy"), LeaveStart = d.StartTime.ToString("hh:mm tt"), LeaveEnd = d.EndTime.ToString("hh:mm tt"), d.StartTime, d.EndTime }).ToListAsync();
+                                        select new { ID = a.ID, Username = a.UserCode, LeaveDate = b.DayDate.ToString("dd/MM/yyyy"), LeaveStart = d.StartTime.ToString("hh:mm tt"), LeaveEnd = d.EndTime.ToString("hh:mm tt"), d.StartTime, d.EndTime }).ToListAsync();
                 foreach (var One in simpleList)
                 {
                     vmApprovals doc = new();

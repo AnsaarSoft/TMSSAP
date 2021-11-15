@@ -12,30 +12,34 @@
     <MudCard Elevation="2">
     <MudCardContent>
         <MudContainer>
-            <MudGrid>
+            @*<MudGrid>
                 <MudItem>
                     <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="ApproveRecords" Disabled="flgBusy">Approved</MudButton>
                 </MudItem>
                 <MudItem>
                     <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="RejectRecords" Disabled="flgBusy">Rejected</MudButton>
                 </MudItem>
-            </MudGrid>
+            </MudGrid>*@
             <MudGrid>
                 <MudItem xs="12" sm="6" md="12">
-                    <MudTable MultiSelection="true" @bind-SelectedItems="SelectedApproval" Items="oCollection" Hover="true" Striped="true" Bordered="true">
+                    <MudTable Items="oCollection" Hover="true" Striped="true" Bordered="true">
                         <HeaderContent>
                             <MudTh>User Name</MudTh>
                             <MudTh>Date</MudTh>
                             <MudTh>Start Time</MudTh>
                             <MudTh>End Time</MudTh>
                             <MudTh>Leave Hour</MudTh>
+                            <MudTh></MudTh>
+                            <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate>
                             <MudTd DataLabel="User Name">@context.Username</MudTd>
                             <MudTd DataLabel="Date">@context.LeaveDate</MudTd>
                             <MudTd DataLabel="Start Time">@context.LeaveStart</MudTd>
                             <MudTd DataLabel="End Time">@context.LeaveEnd</MudTd>
-                            <MudTd DataLabel="Leave Hour">@context.TotalHour.ToString("C2")</MudTd>
+                            <MudTd DataLabel="Leave Hour">@context.TotalHour.ToString("0.00")</MudTd>
+                            <MudTd><MudIconButton Color="Color.Primary"  Icon="@Icons.Material.Filled.CheckCircle" OnClick="(()=>ApproveRecords(context.ID))"></MudIconButton></MudTd>
+                            <MudTd><MudIconButton Color="Color.Error"  Icon="@Icons.Material.Filled.DeleteSweep" OnClick="(()=>RejectRecords(context.ID))"></MudIconButton></MudTd>
                         </RowTemplate>
                         <PagerContent>
                             <MudTablePager />

@@ -84,9 +84,9 @@ namespace TMS.API.Controllers
         {
             try
             {
-                await oTimeSheetRepository.SubmitTimeSheet(oSheet);
-                oSheet.flgSuccess = true;
-                return Ok(oSheet);
+                var oNewModel = await oTimeSheetRepository.SubmitTimeSheet(oSheet);
+                oNewModel.flgSuccess = true;
+                return Ok(oNewModel);
             }
             catch (Exception ex)
             {
@@ -99,9 +99,9 @@ namespace TMS.API.Controllers
         {
             try
             {
-                await oTimeSheetRepository.CancelTimeSheet(oSheet);
-                oSheet.flgSuccess = true;
-                return Ok(oSheet);
+                var oNewModel = await oTimeSheetRepository.CancelTimeSheet(oSheet);
+                oNewModel.flgSuccess = true;
+                return Ok(oNewModel);
             }
             catch (Exception ex)
             {

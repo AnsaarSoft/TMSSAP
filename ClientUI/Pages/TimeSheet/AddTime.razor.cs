@@ -22,8 +22,8 @@ namespace ClientUI.Pages.TimeSheet
         TimeSpan? EndTime = new TimeSpan(16,0,0);
         TimeSpan? LeaveStartTime = new TimeSpan(8, 0, 0);
         TimeSpan? LeaveEndTime = new TimeSpan(16, 0, 0);
-        TimeSpan? BreakStartTime = new TimeSpan(8, 0, 0);
-        TimeSpan? BreakEndTime = new TimeSpan(16, 0, 0);
+        TimeSpan? BreakStartTime = new TimeSpan(13, 0, 0);
+        TimeSpan? BreakEndTime = new TimeSpan(13, 30, 0);
         bool flgLeave = false;
         bool flgBreak = false;
         bool ShowBreak = false;
@@ -114,8 +114,8 @@ namespace ClientUI.Pages.TimeSheet
             EndTime = new TimeSpan(16, 0, 0);
             LeaveStartTime = new TimeSpan(8, 0, 0);
             LeaveEndTime = new TimeSpan(16, 0, 0);
-            BreakStartTime = new TimeSpan(8, 0, 0);
-            BreakEndTime = new TimeSpan(16, 0, 0);
+            BreakStartTime = new TimeSpan(13, 0, 0);
+            BreakEndTime = new TimeSpan(13, 30, 0);
             flgLeave = false;
             flgBreak = false;
         }

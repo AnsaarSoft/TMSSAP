@@ -37,10 +37,10 @@ namespace ClientUI.Shared
                 await oService.Initiallize();
                 oUser = oService.oUser;
             }
-            if(oUser is null)
-            {
-                GotoLogin();
-            }
+            //if(oUser is null)
+            //{
+            //    GotoLogin();
+            //}
         }
 
         void DrawToggle()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RestSharp;
+using RestSharp.Serializers.NewtonsoftJson;
 using TMS.Models.Model;
 using TMS.Models.ViewModel;
 using Microsoft.Extensions.Configuration;
@@ -35,6 +36,7 @@ namespace ClientUI.Services
             string value = oConfig.GetValue<string>("APIBase");
             oStorageService = localStorageService;
             oClient = restClient;
+            oClient.UseNewtonsoftJson();
             oClient.BaseUrl = new Uri(value);
         }
 

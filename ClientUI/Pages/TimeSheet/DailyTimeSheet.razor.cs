@@ -34,17 +34,9 @@ namespace ClientUI.Pages.TimeSheet
         [Inject]
         ISnackbar toast { get; set; }
 
-
-
         #endregion
 
         #region Function
-
-        //protected override void OnInitialized()
-        //{
-        //    base.OnInitialized();
-        //    WeekStart();
-        //}
 
         protected async override Task OnInitializedAsync()
         {
@@ -61,6 +53,7 @@ namespace ClientUI.Pages.TimeSheet
             {
                 oModel.dtFrom = FromDate.GetValueOrDefault();
                 oModel.dtTo = ToDate.GetValueOrDefault();
+                oModel.oCollection = new();
                 oModel.oCollection = await oService.GetUserTimeSheet(oModel);
                 if(oModel.oCollection != null)
                 {
@@ -109,8 +102,19 @@ namespace ClientUI.Pages.TimeSheet
             flgBusy = true;
             try
             {
-                oModel = await oService.SubmitTimeSheet(oModel);
-                //await GetData();
+                await oService.SubmitTimeSheet(oModel);
+                foreach (var One in oModel.oSelected)
+                {
+                    if (One.flgLeave)
+                    {
+                        One.Status = "Draft-Pending";
+                    }
+                    else
+                    {
+                        One.Status = "Posted";
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -126,7 +130,10 @@ namespace ClientUI.Pages.TimeSheet
             try
             {
                 await oService.CancelTimeSheet(oModel);
-                await GetData();
+                foreach (var One in oModel.oSelected)
+                {
+                    One.Status = "Cancelled";
+                }
             }
             catch (Exception ex)
             {

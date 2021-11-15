@@ -1,6 +1,111 @@
 Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
-Date: 14/11/2021 04:59 pm 
+Date: 15/11/2021 01:17 PM 
 Detail: No Detail
 Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
-Date: 14/11/2021 04:59 pm 
+Date: 15/11/2021 01:17 PM 
+Detail: No Detail
+Exception Message: Unable to cast object of type 'RestSharp.JsonArray' to type 'System.Collections.Generic.IDictionary`2[System.String,System.Object]'. 
+Date: 15/11/2021 01:38 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 02:46 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 02:46 PM 
+Detail: No Detail
+Exception Message: Unable to cast object of type 'RestSharp.JsonArray' to type 'System.Collections.Generic.IDictionary`2[System.String,System.Object]'. 
+Date: 15/11/2021 02:46 PM 
+Detail: No Detail
+Exception Message: Unable to cast object of type 'RestSharp.JsonArray' to type 'System.Collections.Generic.IDictionary`2[System.String,System.Object]'. 
+Date: 15/11/2021 02:49 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 02:49 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 02:49 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 02:52 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 02:52 PM 
+Detail: No Detail
+Exception Message: Unable to cast object of type 'RestSharp.JsonArray' to type 'System.Collections.Generic.IDictionary`2[System.String,System.Object]'. 
+Date: 15/11/2021 02:53 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 02:58 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 02:58 PM 
+Detail: No Detail
+Exception Message: Unable to cast object of type 'RestSharp.JsonArray' to type 'System.Collections.Generic.IDictionary`2[System.String,System.Object]'. 
+Date: 15/11/2021 03:08 PM 
+Detail: No Detail
+Exception Message: Unable to cast object of type 'RestSharp.JsonArray' to type 'System.Collections.Generic.IDictionary`2[System.String,System.Object]'. 
+Date: 15/11/2021 03:11 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 03:35 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 03:35 PM 
+Detail: No Detail
+Exception Message: Unable to cast object of type 'RestSharp.JsonArray' to type 'System.Collections.Generic.IDictionary`2[System.String,System.Object]'. 
+Date: 15/11/2021 03:36 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 03:41 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 03:41 PM 
+Detail: No Detail
+Exception Message: Unable to cast object of type 'RestSharp.JsonArray' to type 'System.Collections.Generic.IDictionary`2[System.String,System.Object]'. 
+Date: 15/11/2021 03:41 PM 
+Detail: No Detail
+Exception Message: Unable to cast object of type 'RestSharp.JsonArray' to type 'System.Collections.Generic.IDictionary`2[System.String,System.Object]'. 
+Date: 15/11/2021 03:42 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 03:49 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 03:49 PM 
+Detail: No Detail
+Exception Message: Unable to cast object of type 'RestSharp.JsonArray' to type 'System.Collections.Generic.IDictionary`2[System.String,System.Object]'. 
+Date: 15/11/2021 03:52 PM 
+Detail: No Detail
+Exception Message: Unable to cast object of type 'RestSharp.JsonArray' to type 'System.Collections.Generic.IDictionary`2[System.String,System.Object]'. 
+Date: 15/11/2021 03:52 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 04:13 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 04:50 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 05:21 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 05:24 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 05:27 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 05:46 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 05:47 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 05:53 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 05:54 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 15/11/2021 05:57 PM 
 Detail: No Detail
