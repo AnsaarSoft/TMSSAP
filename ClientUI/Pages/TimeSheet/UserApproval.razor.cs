@@ -44,7 +44,16 @@ namespace ClientUI.Pages.TimeSheet
             try
             {
                 //oCollection.Remove();
-                SuccessMessage($"document approved: {id}");
+                var item = oCollection.Where(a => a.ID == id).FirstOrDefault();
+                if (item is not null)
+                {
+                    var result = await oService.ApproveTimesheet(item);
+                    if(result)
+                    {
+                        oCollection.Remove(item);
+                        SuccessMessage($"Document number {id} approved successfully.");
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -58,7 +67,16 @@ namespace ClientUI.Pages.TimeSheet
             flgBusy = true;
             try
             {
-                SuccessMessage($"document rejected: {id}");
+                var item = oCollection.Where(a => a.ID == id).FirstOrDefault();
+                if (item is not null)
+                {
+                    var result = await oService.RejectTimesheet(item);
+                    if(result)
+                    {
+                        SuccessMessage($"Document number {id} rejected successfully.");
+                        oCollection.Remove(item);
+                    }
+                }
             }
             catch (Exception ex)
             {

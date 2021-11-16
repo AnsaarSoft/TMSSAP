@@ -19,6 +19,8 @@ namespace TMS.API.Model
         Task<vmTimeSheet> CancelTimeSheet(vmTimeSheet oSheet);
         Task<List<vmReportSheet>> GetUserReport(DateTime prmFrom, DateTime prmTo, int prmUser, string prmUserName);
         Task<List<vmApprovals>> GetAllApprovals(int prmUserId);
+        Task<vmApprovals> ApproveTimeSheet(vmApprovals approval);
+        Task<vmApprovals> RejectTimeSheet(vmApprovals approval);
     }
 
     public class TimeSheetRepository : ITimeSheetRepository
@@ -152,8 +154,8 @@ namespace TMS.API.Model
                         if (oRecord.flgLeave)
                         {
                             var normalUser = await (from a in dbContext.Users
-                                                      where a.ID == One.rUser
-                                                      select a).FirstOrDefaultAsync();
+                                                    where a.ID == One.rUser
+                                                    select a).FirstOrDefaultAsync();
                             var approvalUser = await (from a in dbContext.Users
                                                           //where a.UserName.Contains(normalUser.UserName, StringComparison.InvariantCultureIgnoreCase)
                                                       where a.UserName == normalUser.Manager
@@ -305,6 +307,86 @@ namespace TMS.API.Model
                 Logs logs = new();
                 logs.Logger(ex);
                 return approvalList;
+            }
+        }
+
+        public async Task<vmApprovals> ApproveTimeSheet(vmApprovals approval)
+        {
+            try
+            {
+                var approvalRecord = await (from a in dbContext.UserApprovals
+                                            where a.ID == approval.ID
+                                            select a).FirstOrDefaultAsync();
+                if (approvalRecord is null)
+                    return null;
+
+                var timeSheet = await (from a in dbContext.TimeSheets
+                                       where a.ID == approvalRecord.rDocument
+                                       select a).FirstOrDefaultAsync();
+                if (timeSheet is null)
+                    return null;
+
+                approvalRecord.Status = "Approved";
+                timeSheet.Status = "Posted";
+
+                var oLeave = await (from a in dbContext.LeaveTimes
+                                    where a.rTimeSheet == timeSheet.ID
+                                    && a.rUser == timeSheet.rUser
+                                    select a).FirstOrDefaultAsync();
+                if (oLeave != null)
+                {
+                    var oUser = await (from a in dbContext.Users
+                                       where a.ID == timeSheet.rUser
+                                       select a).FirstOrDefaultAsync();
+                    if (oUser != null)
+                    {
+                        TimeSpan Hours = oLeave.EndTime - oLeave.StartTime;
+                        oUser.LeaveHours -= Hours.TotalHours;
+                        dbContext.Entry<User>(oUser).State = EntityState.Modified;
+                    }
+                }
+
+                dbContext.Entry<UserApproval>(approvalRecord).State = EntityState.Modified;
+                dbContext.Entry<TimeSheet>(timeSheet).State = EntityState.Modified;
+                await dbContext.SaveChangesAsync();
+                return approval;
+            }
+            catch (Exception ex)
+            {
+                Logs logs = new();
+                logs.Logger(ex);
+                return null;
+            }
+        }
+
+        public async Task<vmApprovals> RejectTimeSheet(vmApprovals approval)
+        {
+            try
+            {
+                var approvalRecord = await (from a in dbContext.UserApprovals
+                                            where a.ID == approval.ID
+                                            select a).FirstOrDefaultAsync();
+                if (approvalRecord is null)
+                    return null;
+                var timeSheet = await (from a in dbContext.TimeSheets
+                                       where a.ID == approvalRecord.rDocument
+                                       select a).FirstOrDefaultAsync();
+                if (timeSheet is null)
+                    return null;
+                timeSheet.Status = "Cancelled";
+                approvalRecord.Status = "Rejected";
+
+
+                dbContext.Entry<UserApproval>(approvalRecord).State = EntityState.Modified;
+                dbContext.Entry<TimeSheet>(timeSheet).State = EntityState.Modified;
+                await dbContext.SaveChangesAsync();
+                return approval;
+            }
+            catch (Exception ex)
+            {
+                Logs logs = new();
+                logs.Logger(ex);
+                return null;
             }
         }
 

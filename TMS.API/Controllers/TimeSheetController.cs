@@ -77,7 +77,6 @@ namespace TMS.API.Controllers
                 return BadRequest("Some went wrong.");
             }
         }
-
         
         [HttpPost, Route("submitsheet")]
         public async Task<IActionResult> SubmitTimeSheet([FromBody] vmTimeSheet oSheet)
@@ -157,5 +156,38 @@ namespace TMS.API.Controllers
                 return BadRequest("Internal server error.");
             }
         }
+        
+        [HttpPost, Route("approvesheet")]
+        public async Task<IActionResult> ApproveTimeSheet([FromBody] vmApprovals prmApproval)
+        {
+            try
+            {
+                var result = await oTimeSheetRepository.ApproveTimeSheet(prmApproval);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Logs logs = new();
+                logs.Logger(ex);
+                return BadRequest("Internal server error.");
+            }
+        }
+
+        [HttpPost, Route("rejectsheet")]
+        public async Task<IActionResult> RejectTimeSheet([FromBody] vmApprovals prmApproval)
+        {
+            try
+            {
+                var result = await oTimeSheetRepository.RejectTimeSheet(prmApproval);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Logs logs = new();
+                logs.Logger(ex);
+                return BadRequest("Internal server error.");
+            }
+        }
+
     }
 }

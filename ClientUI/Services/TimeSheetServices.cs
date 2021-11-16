@@ -22,6 +22,8 @@ namespace ClientUI.Services
         Task<vmTimeSheet> CancelTimeSheet(vmTimeSheet oSheet);
         Task<List<vmReportSheet>> GetUserReport(string prmFrom, string prmTo, int prmUserId, string prmUserName);
         Task<List<vmApprovals>> GetAllPendingDocument();
+        Task<bool> ApproveTimesheet(vmApprovals prmTimesheet);
+        Task<bool> RejectTimesheet(vmApprovals prmTimesheet);
     }
     public class TimeSheetServices : ITimeSheetServices
     {
@@ -258,6 +260,50 @@ namespace ClientUI.Services
                 Logs.Logger(ex);
             }
             return approvalList;
+        }
+
+        public async Task<bool> ApproveTimesheet(vmApprovals prmTimesheet)
+        {
+            try
+            {
+                var Request = new RestRequest("/timesheet/approvesheet").AddJsonBody(prmTimesheet);
+                var value = await oClient.PostAsync<vmApprovals>(Request);
+                if(value is null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.Logger(ex);
+                return false;
+            }
+        }
+
+        public async Task<bool> RejectTimesheet(vmApprovals prmTimesheet)
+        {
+            try
+            {
+                var Request = new RestRequest("/timesheet/rejectsheet").AddJsonBody(prmTimesheet);
+                var value = await oClient.PostAsync<vmApprovals>(Request);
+                if(value is not null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.Logger(ex);
+                return false;
+            }
         }
 
     }
