@@ -16,8 +16,8 @@ namespace ClientUI.Pages.TimeSheet
 
         #region Variable
         bool flgBusy = false;
-        DateTime? FromDate = DateTime.Now;
-        DateTime? ToDate = DateTime.Now;
+        DateTime? FromDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+        DateTime? ToDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 28);
         List<User> UserList = new List<User>();
         User oUser = new User();
         List<vmReportSheet> TimesheetList = new List<vmReportSheet>();
@@ -62,8 +62,8 @@ namespace ClientUI.Pages.TimeSheet
         {
             try
             {
-                string fromdate = FromDate.Value.ToString("dd/MM/yyyy");
-                string todate = ToDate.Value.ToString("dd/MM/yyyy");
+                string fromdate = FromDate.Value.ToString("MM/dd/yyyy");
+                string todate = ToDate.Value.ToString("MM/dd/yyyy");
                 TimesheetList = await oService.GetUserReport(fromdate, todate, oUser.ID, oUser.UserName);
             }
             catch (Exception ex)

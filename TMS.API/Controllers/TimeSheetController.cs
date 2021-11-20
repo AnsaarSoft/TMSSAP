@@ -120,6 +120,8 @@ namespace TMS.API.Controllers
             }
             catch (Exception ex)
             {
+                Logs logs = new();
+                logs.Logger(ex);
                 return BadRequest("Some went wrong.");
             }
         }

@@ -121,3 +121,210 @@ Detail: No Detail
 Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
 Date: 16/11/2021 04:18 PM 
 Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 18/11/2021 10:07 AM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 11:00 AM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 11:01 AM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 11:02 AM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 11:03 AM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 11:14 AM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 11:40 AM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 11:55 AM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 12:16 PM 
+Detail: No Detail
+Exception Message: Error converting value "Some went wrong." to type 'System.Collections.Generic.List`1[TMS.Models.ViewModel.vmReportSheet]'. Path '', line 1, position 18. 
+Date: 19/11/2021 12:17 PM 
+Detail: System.ArgumentException: Could not cast or convert from System.String to System.Collections.Generic.List`1[TMS.Models.ViewModel.vmReportSheet].
+   at Newtonsoft.Json.Utilities.ConvertUtils.EnsureTypeAssignable(Object value, Type initialType, Type targetType)
+   at Newtonsoft.Json.Utilities.ConvertUtils.ConvertOrCast(Object initialValue, CultureInfo culture, Type targetType)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.EnsureType(JsonReader reader, Object value, CultureInfo culture, JsonContract contract, Type targetType)
+Exception Message: Error converting value "Some went wrong." to type 'System.Collections.Generic.List`1[TMS.Models.ViewModel.vmReportSheet]'. Path '', line 1, position 18. 
+Date: 19/11/2021 12:17 PM 
+Detail: System.ArgumentException: Could not cast or convert from System.String to System.Collections.Generic.List`1[TMS.Models.ViewModel.vmReportSheet].
+   at Newtonsoft.Json.Utilities.ConvertUtils.EnsureTypeAssignable(Object value, Type initialType, Type targetType)
+   at Newtonsoft.Json.Utilities.ConvertUtils.ConvertOrCast(Object initialValue, CultureInfo culture, Type targetType)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.EnsureType(JsonReader reader, Object value, CultureInfo culture, JsonContract contract, Type targetType)
+Exception Message: Error converting value "Some went wrong." to type 'System.Collections.Generic.List`1[TMS.Models.ViewModel.vmReportSheet]'. Path '', line 1, position 18. 
+Date: 19/11/2021 12:17 PM 
+Detail: System.ArgumentException: Could not cast or convert from System.String to System.Collections.Generic.List`1[TMS.Models.ViewModel.vmReportSheet].
+   at Newtonsoft.Json.Utilities.ConvertUtils.EnsureTypeAssignable(Object value, Type initialType, Type targetType)
+   at Newtonsoft.Json.Utilities.ConvertUtils.ConvertOrCast(Object initialValue, CultureInfo culture, Type targetType)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.EnsureType(JsonReader reader, Object value, CultureInfo culture, JsonContract contract, Type targetType)
+Exception Message: Error converting value "Some went wrong." to type 'System.Collections.Generic.List`1[TMS.Models.ViewModel.vmReportSheet]'. Path '', line 1, position 18. 
+Date: 19/11/2021 12:17 PM 
+Detail: System.ArgumentException: Could not cast or convert from System.String to System.Collections.Generic.List`1[TMS.Models.ViewModel.vmReportSheet].
+   at Newtonsoft.Json.Utilities.ConvertUtils.EnsureTypeAssignable(Object value, Type initialType, Type targetType)
+   at Newtonsoft.Json.Utilities.ConvertUtils.ConvertOrCast(Object initialValue, CultureInfo culture, Type targetType)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.EnsureType(JsonReader reader, Object value, CultureInfo culture, JsonContract contract, Type targetType)
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 12:20 PM 
+Detail: No Detail
+Exception Message: Error converting value "Some went wrong." to type 'System.Collections.Generic.List`1[TMS.Models.ViewModel.vmReportSheet]'. Path '', line 1, position 18. 
+Date: 19/11/2021 12:20 PM 
+Detail: System.ArgumentException: Could not cast or convert from System.String to System.Collections.Generic.List`1[TMS.Models.ViewModel.vmReportSheet].
+   at Newtonsoft.Json.Utilities.ConvertUtils.EnsureTypeAssignable(Object value, Type initialType, Type targetType)
+   at Newtonsoft.Json.Utilities.ConvertUtils.ConvertOrCast(Object initialValue, CultureInfo culture, Type targetType)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.EnsureType(JsonReader reader, Object value, CultureInfo culture, JsonContract contract, Type targetType)
+Exception Message: Error converting value "Some went wrong." to type 'System.Collections.Generic.List`1[TMS.Models.ViewModel.vmReportSheet]'. Path '', line 1, position 18. 
+Date: 19/11/2021 12:24 PM 
+Detail: System.ArgumentException: Could not cast or convert from System.String to System.Collections.Generic.List`1[TMS.Models.ViewModel.vmReportSheet].
+   at Newtonsoft.Json.Utilities.ConvertUtils.EnsureTypeAssignable(Object value, Type initialType, Type targetType)
+   at Newtonsoft.Json.Utilities.ConvertUtils.ConvertOrCast(Object initialValue, CultureInfo culture, Type targetType)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.EnsureType(JsonReader reader, Object value, CultureInfo culture, JsonContract contract, Type targetType)
+Exception Message: Error converting value "Some went wrong." to type 'System.Collections.Generic.List`1[TMS.Models.ViewModel.vmReportSheet]'. Path '', line 1, position 18. 
+Date: 19/11/2021 12:26 PM 
+Detail: System.ArgumentException: Could not cast or convert from System.String to System.Collections.Generic.List`1[TMS.Models.ViewModel.vmReportSheet].
+   at Newtonsoft.Json.Utilities.ConvertUtils.EnsureTypeAssignable(Object value, Type initialType, Type targetType)
+   at Newtonsoft.Json.Utilities.ConvertUtils.ConvertOrCast(Object initialValue, CultureInfo culture, Type targetType)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.EnsureType(JsonReader reader, Object value, CultureInfo culture, JsonContract contract, Type targetType)
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 12:58 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 01:09 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 01:10 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 01:10 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 01:11 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 01:11 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 01:12 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 01:13 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 02:42 PM 
+Detail: No Detail
+Exception Message: No connection could be made because the target machine actively refused it. (localhost:56388) 
+Date: 19/11/2021 02:43 PM 
+Detail: System.Net.Http.HttpRequestException: No connection could be made because the target machine actively refused it. (localhost:56388)
+ ---> System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|283_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.DefaultConnectAsync(SocketsHttpConnectionContext context, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.ConnectAsync(Func`3 callback, DnsEndPoint endPoint, HttpRequestMessage requestMessage, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.ConnectAsync(Func`3 callback, DnsEndPoint endPoint, HttpRequestMessage requestMessage, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttpConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.DecompressionHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.SendAsyncCore(HttpRequestMessage request, HttpCompletionOption completionOption, Boolean async, Boolean emitTelemetryStartStop, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async)
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 02:43 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 02:43 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 02:44 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 02:48 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 02:57 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 02:57 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:00 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:01 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:02 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:02 PM 
+Detail: No Detail
+Exception Message: No connection could be made because the target machine actively refused it. (localhost:56388) 
+Date: 19/11/2021 03:02 PM 
+Detail: System.Net.Http.HttpRequestException: No connection could be made because the target machine actively refused it. (localhost:56388)
+ ---> System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|283_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.DefaultConnectAsync(SocketsHttpConnectionContext context, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.ConnectAsync(Func`3 callback, DnsEndPoint endPoint, HttpRequestMessage requestMessage, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.ConnectAsync(Func`3 callback, DnsEndPoint endPoint, HttpRequestMessage requestMessage, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttpConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.DecompressionHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.SendAsyncCore(HttpRequestMessage request, HttpCompletionOption completionOption, Boolean async, Boolean emitTelemetryStartStop, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async)
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:05 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:05 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:06 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:06 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:07 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:08 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:08 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:08 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:09 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:10 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:10 PM 
+Detail: No Detail
+Exception Message: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method. 
+Date: 19/11/2021 03:12 PM 
+Detail: No Detail

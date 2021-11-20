@@ -1,0 +1,14 @@
+﻿@code {
+    [Inject]
+    NavigationManager oNavigation { get; set; }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        GotoLogin();
+    }
+
+    void GotoLogin()
+    {
+        oNavigation.NavigateTo("/account/login");
+    }
+}

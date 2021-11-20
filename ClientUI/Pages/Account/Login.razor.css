@@ -1,6 +1,6 @@
 ﻿.centerlogin {
-    width: 500px;
-    height: 300px;
+    width: 600px;
+    height: 500px;
     margin-left: 400px;
     margin-top: 200px;
     justify-content: center;
@@ -10,4 +10,13 @@
     font-family: Roboto;
     font-display: block;
     padding: 10px;
+    text-align:center;
+}
+
+.imagesetting{
+    width: 150px;
+    height: 150px;
+    float: left;
+    padding: 0px;
+
 }

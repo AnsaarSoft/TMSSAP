@@ -29,19 +29,32 @@ namespace ClientUI.Shared
 
         #region Functions
 
-        protected override async Task OnInitializedAsync()
-        {
-            var authstate = await oAuthState;
-            if(authstate.User.Identity.IsAuthenticated)
-            {
-                await oService.Initiallize();
-                oUser = oService.oUser;
-            }
-            //if(oUser is null)
-            //{
-            //    GotoLogin();
-            //}
-        }
+        //protected override async Task OnInitializedAsync()
+        //{
+        //    var authstate = await oAuthState;
+        //    if (authstate.User.Identity.IsAuthenticated)
+        //    {
+        //        await oService.Initiallize();
+        //        oUser = oService.oUser;
+        //    }
+        //    if (oUser is null)
+        //    {
+        //        GotoLogin();
+        //    }
+        //}
+
+        //protected override async Task OnAfterRenderAsync(bool firstRender)
+        //{
+        //    if(!firstRender)
+        //    {
+        //        var authstate = await oAuthState;
+        //        if (authstate.User.Identity.IsAuthenticated)
+        //        {
+        //            await oService.Initiallize();
+        //            oUser = oService.oUser;
+        //        }
+        //    }
+        //}
 
         void DrawToggle()
         {

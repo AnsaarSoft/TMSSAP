@@ -5,9 +5,15 @@
 <div class="centerlogin">
     <MudCard Elevation="3">
         <div class="headerfont">
-            <MudText Typo="Typo.h6">Welcome to Time Sheet Managment</MudText>
+            <div >
+                <img class="imagesetting" src="../image/login.png" />
+            </div>
+            <MudText Typo="Typo.h5">Timesheet</MudText>
+            <MudText Typo="Typo.h5">Management</MudText>
+            <MudText Typo="Typo.h5">System</MudText>
+            <MudText Typo="Typo.h6">Log In</MudText>
         </div>
-        <MudCardContent>
+        <MudCardContent Style="margin-top: 10px;">
             <MudForm Model="oUser">
                 <MudItem xs="12" sm="6" md="4">
                     <MudTextField T="string" Label="Username" Required="true" RequiredError="Username is mandatory" @bind-Text="oUser.UserCode"></MudTextField>
@@ -17,7 +23,6 @@
         </MudCardContent>
         <MudCardActions>
             <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="LoginUser" Disabled="flgBusy">Login</MudButton>
-            <MudButton Variant="Variant.Filled" Color="Color.Default" Disabled="true">Forget Password</MudButton>
         </MudCardActions>
 
     </MudCard>
