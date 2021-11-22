@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using TMS.API.Model;
@@ -113,8 +114,9 @@ namespace TMS.API.Controllers
         {
             try
             {
-                DateTime fromdate = Convert.ToDateTime(prmFrom);
-                DateTime todate = Convert.ToDateTime(prmTo);
+                //DateTime fromdate = Convert.ToDateTime(prmFrom);
+                DateTime fromdate = DateTime.ParseExact(prmFrom, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                DateTime todate = DateTime.ParseExact(prmTo, "MM/dd/yyyy", CultureInfo.InvariantCulture);
                 List<vmReportSheet> TimeSheetList = await oTimeSheetRepository.GetUserReport(fromdate, todate, prmUser, prmUserName);                
                 return Ok(TimeSheetList);
             }

@@ -9,10 +9,13 @@
     <MudDivider Class="my-2" />
     <MudNavLink Href="/dashboard" Icon="@Icons.Filled.Dashboard">Dashboard</MudNavLink>
     <MudNavLink Href="/timesheet/dailytimesheet" Icon="@Icons.Filled.Receipt">Daily Time</MudNavLink>
+    @if (flgApprover)
+    {
+        <MudNavLink Href="/timesheet/userapproval" Icon="@Icons.Filled.Receipt">Approval Decision</MudNavLink>
+    }
     @if (flgAdmin)
     {
         <MudNavLink Href="/account/userlist" Icon="@Icons.Filled.Receipt">User List</MudNavLink>
-        <MudNavLink Href="/timesheet/userapproval" Icon="@Icons.Filled.Receipt">Approval Decision</MudNavLink>
         <MudNavGroup Title="Reports" Expanded="false" Icon="@Icons.Filled.Settings">
             <MudNavLink Href="/timesheet/userreport" Icon="@Icons.Filled.Receipt">User TimeSheet</MudNavLink>
         </MudNavGroup>
@@ -23,6 +26,7 @@
 @code
 {
     bool flgAdmin = false;
+    bool flgApprover = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -36,6 +40,14 @@
             else
             {
                 flgAdmin = false;
+            }
+            if (oAcctService.oUser.User.flgAprover)
+            {
+                flgApprover = true;
+            }
+            else
+            {
+                flgApprover = false;
             }
         }
 

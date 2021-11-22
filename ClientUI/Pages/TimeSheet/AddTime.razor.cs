@@ -18,8 +18,8 @@ namespace ClientUI.Pages.TimeSheet
         bool flgBusy = false;
 
         DateTime? DayDate = DateTime.UtcNow;
-        TimeSpan? StartTime = new TimeSpan(8,0,0);
-        TimeSpan? EndTime = new TimeSpan(16,0,0);
+        TimeSpan? StartTime = new TimeSpan(8, 0, 0);
+        TimeSpan? EndTime = new TimeSpan(16, 0, 0);
         TimeSpan? LeaveStartTime = new TimeSpan(8, 0, 0);
         TimeSpan? LeaveEndTime = new TimeSpan(16, 0, 0);
         TimeSpan? BreakStartTime = new TimeSpan(13, 0, 0);
@@ -38,6 +38,8 @@ namespace ClientUI.Pages.TimeSheet
 
         [Inject]
         ITimeSheetServices oService { get; set; }
+        [Inject]
+        IAccountServices oAcctService { get; set; }
         [Inject]
         NavigationManager oNavigation { get; set; }
         [Inject]
@@ -66,14 +68,28 @@ namespace ClientUI.Pages.TimeSheet
                 oModel.oTime.DayDate = DayDate.GetValueOrDefault().ToString();
                 oModel.oTime.StartTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, StartTime.Value.Hours, StartTime.Value.Minutes, 0).ToString();
                 oModel.oTime.EndTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, EndTime.Value.Hours, EndTime.Value.Minutes, 0).ToString();
-                if(flgLeave)
+                if (flgLeave)
                 {
-                    oModel.oTime.flgLeave = flgLeave;
-                    oModel.oLeave = new mLeaveTime();
-                    oModel.oLeave.StartTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, LeaveStartTime.Value.Hours, LeaveStartTime.Value.Minutes, 0).ToString();
-                    oModel.oLeave.EndTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, LeaveEndTime.Value.Hours, LeaveEndTime.Value.Minutes, 0).ToString();
+                    //Validate Check.
+                    await oAcctService.Initiallize();
+                    var user = oAcctService.oUser.User;
+                    double leaveHour = (LeaveEndTime.Value.TotalHours - LeaveStartTime.Value.TotalHours);
+                    if (leaveHour < user.LeaveHours)
+                    {
+                        oModel.oTime.flgLeave = flgLeave;
+                        oModel.oLeave = new mLeaveTime();
+                        oModel.oLeave.StartTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, LeaveStartTime.Value.Hours, LeaveStartTime.Value.Minutes, 0).ToString();
+                        oModel.oLeave.EndTime = new DateTime(DayDate.Value.Year, DayDate.Value.Month, DayDate.Value.Day, LeaveEndTime.Value.Hours, LeaveEndTime.Value.Minutes, 0).ToString();
+                    }
+                    else
+                    {
+                        ErrorMessage("You didn't have enough leave hours.");
+                        ClearRecord();
+                        flgBusy = false;
+                        return;
+                    }
                 }
-                if(flgBreak)
+                if (flgBreak)
                 {
                     oModel.oTime.flgBreak = flgBreak;
                     oModel.oBreak = new mBreakTime();
@@ -82,7 +98,7 @@ namespace ClientUI.Pages.TimeSheet
                 }
 
                 var CheckTime = await oService.AddTimeSheet(oModel);
-                if(CheckTime == null)
+                if (CheckTime == null)
                 {
                     //"Error"
                     ErrorMessage("Record didn't add, something went wrong.");
@@ -118,6 +134,7 @@ namespace ClientUI.Pages.TimeSheet
             BreakEndTime = new TimeSpan(13, 30, 0);
             flgLeave = false;
             flgBreak = false;
+            oModel = new();
         }
 
         public void SuccessMessage(string message)
